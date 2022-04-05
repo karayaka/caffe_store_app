@@ -10,7 +10,7 @@ class BasketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("ctrl.bskd"),
+      child: Text(ctrl.bsl.value),
     );
   }
 }
