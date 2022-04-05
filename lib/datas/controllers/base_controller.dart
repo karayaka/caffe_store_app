@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BaseController extends GetxController {
-  ScreanState state = ScreanState.loding;
+  var state = ScreanState.loaded.obs;
 
   int pageCount = 0;
   int pageSize = 0;

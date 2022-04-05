@@ -7,9 +7,5 @@ class BasketController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    print("inibasket");
-    bsl.value = repo.ReturnInt();
   }
-
-  var bsl = "deneöe".obs;
 }
