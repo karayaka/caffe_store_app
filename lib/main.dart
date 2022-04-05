@@ -4,6 +4,8 @@ import 'package:caffe_store_app/theme_datas/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bindings/initial_binding.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,9 +17,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'STRABORN',
       theme: coffeStoreTheme,
-      //initialBinding: InitialBinding(),
+      initialBinding: InitialBinding(),
       getPages: RoutePages.pages,
-      initialRoute: RouteConst.splash,
+      initialRoute: RouteConst.home,
     );
   }
 }

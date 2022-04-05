@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/bindings/home_binding.dart';
 import 'package:caffe_store_app/bindings/splash_binding.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:caffe_store_app/views/home_pages/home_page.dart';
@@ -9,16 +10,16 @@ class RoutePages {
     GetPage(
       name: RouteConst.home,
       page: () => HomePage(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: RouteConst.splash,
-      page: () => SplashPage(),
+      page: () => const SplashPage(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: RouteConst.login,
       page: () => HomePage(),
-      //binding: HomeBi(),
     ),
   ];
 }
