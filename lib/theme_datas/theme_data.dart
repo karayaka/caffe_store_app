@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 
 final ThemeData coffeStoreTheme = ThemeData(
   primarySwatch: const MaterialColor(4281219389, {
-    50: const Color(0xfff0f3f4),
-    100: const Color(0xffe2e7e9),
-    200: const Color(0xffc5cfd3),
-    300: const Color(0xffa8b8bd),
-    400: const Color(0xff8ba0a7),
-    500: const Color(0xff6e8891),
-    600: const Color(0xff586d74),
-    700: const Color(0xff425257),
-    800: const Color(0xff2c363a),
-    900: const Color(0xff161b1d)
+    50: Color(0xfff0f3f4),
+    100: Color(0xffe2e7e9),
+    200: Color(0xffc5cfd3),
+    300: Color(0xffa8b8bd),
+    400: Color(0xff8ba0a7),
+    500: Color(0xff6e8891),
+    600: Color(0xff586d74),
+    700: Color(0xff425257),
+    800: Color(0xff2c363a),
+    900: Color(0xff161b1d)
   }),
   brightness: Brightness.light,
   primaryColor: const Color(0xff2e393d),
-  primaryColorBrightness: Brightness.dark,
   primaryColorLight: const Color(0xffe2e7e9),
   primaryColorDark: const Color(0xff425257),
   accentColor: const Color(0xff6e8891),
   accentColorBrightness: Brightness.dark,
   canvasColor: const Color(0xfffafafa),
   scaffoldBackgroundColor: const Color(0xfffafafa),
-  bottomAppBarColor: const Color(0xffffffff),
+  bottomAppBarColor: const Color(0xff2e393d),
   cardColor: const Color(0xffffffff),
   dividerColor: const Color(0x1f000000),
   highlightColor: const Color(0x66bcbcbc),
@@ -55,20 +54,19 @@ final ThemeData coffeStoreTheme = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(2.0)),
     ),
     alignedDropdown: false,
-    buttonColor: const Color(0xffe0e0e0),
-    disabledColor: const Color(0x61000000),
-    highlightColor: const Color(0x29000000),
+    buttonColor: Color(0xffe0e0e0),
+    disabledColor: Color(0x61000000),
+    highlightColor: Color(0x29000000),
     splashColor: Color(0x1f000000),
     focusColor: Color(0x1f000000),
     hoverColor: Color(0x0a000000),
     colorScheme: ColorScheme(
       primary: Color(0xff2e393d),
-      primaryVariant: Color(0xff425257),
-      secondary: Color(0xff6e8891),
+      secondary: Color(0xff6e8891), //buraya markanın ikinci rengini getireceğiz
       surface: Color(0xffffffff),
-      background: const Color(0xffc5cfd3),
-      error: const Color(0xffd32f2f),
-      onPrimary: const Color(0xffffffff),
+      background: Color(0xffc5cfd3),
+      error: Color(0xffd32f2f),
+      onPrimary: Color(0xffffffff),
       onSecondary: Color(0xffffffff),
       onSurface: Color(0xff000000),
       onBackground: Color(0xffffffff),
@@ -117,13 +115,13 @@ final ThemeData coffeStoreTheme = ThemeData(
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    helperStyle: const TextStyle(
+    helperStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    hintStyle: const TextStyle(
+    hintStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
@@ -137,30 +135,29 @@ final ThemeData coffeStoreTheme = ThemeData(
     ),
     errorMaxLines: null,
     isDense: false,
-    contentPadding:
-        const EdgeInsets.only(top: 12, bottom: 12, left: 0, right: 0),
+    contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 0, right: 0),
     isCollapsed: false,
-    prefixStyle: const TextStyle(
+    prefixStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    suffixStyle: const TextStyle(
+    suffixStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    counterStyle: const TextStyle(
+    counterStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
     filled: false,
-    fillColor: const Color(0x00000000),
-    errorBorder: const UnderlineInputBorder(
+    fillColor: Color(0x00000000),
+    errorBorder: UnderlineInputBorder(
       borderSide: BorderSide(
         color: Color(0xff000000),
         width: 1,
@@ -174,9 +171,9 @@ final ThemeData coffeStoreTheme = ThemeData(
         width: 1,
         style: BorderStyle.solid,
       ),
-      borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
-    focusedErrorBorder: const UnderlineInputBorder(
+    focusedErrorBorder: UnderlineInputBorder(
       borderSide: BorderSide(
         color: Color(0xff000000),
         width: 1,
@@ -184,15 +181,7 @@ final ThemeData coffeStoreTheme = ThemeData(
       ),
       borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
-    disabledBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(
-        color: Color(0xff000000),
-        width: 1,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.all(const Radius.circular(4.0)),
-    ),
-    enabledBorder: const UnderlineInputBorder(
+    disabledBorder: UnderlineInputBorder(
       borderSide: BorderSide(
         color: Color(0xff000000),
         width: 1,
@@ -200,7 +189,15 @@ final ThemeData coffeStoreTheme = ThemeData(
       ),
       borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
-    border: const UnderlineInputBorder(
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Color(0xff000000),
+        width: 1,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+    border: UnderlineInputBorder(
       borderSide: BorderSide(
         color: Color(0xff000000),
         width: 1,
@@ -238,7 +235,7 @@ final ThemeData coffeStoreTheme = ThemeData(
     overlayColor: null,
     valueIndicatorColor: null,
     showValueIndicator: null,
-    valueIndicatorTextStyle: const TextStyle(
+    valueIndicatorTextStyle: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
@@ -247,8 +244,8 @@ final ThemeData coffeStoreTheme = ThemeData(
   ),
   tabBarTheme: const TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
-    labelColor: const Color(0xffffffff),
-    unselectedLabelColor: const Color(0xb2ffffff),
+    labelColor: Color(0xffffffff),
+    unselectedLabelColor: Color(0xb2ffffff),
   ),
   chipTheme: const ChipThemeData(
     backgroundColor: Color(0x1f000000),
@@ -262,8 +259,8 @@ final ThemeData coffeStoreTheme = ThemeData(
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    padding: const EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
-    secondaryLabelStyle: const TextStyle(
+    padding: EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
+    secondaryLabelStyle: TextStyle(
       color: Color(0x3d000000),
       fontSize: null,
       fontWeight: FontWeight.w400,
