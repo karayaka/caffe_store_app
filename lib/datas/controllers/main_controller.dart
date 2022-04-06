@@ -6,6 +6,7 @@ import '../../routings/route_couns.dart';
 
 class MainController extends BaseController {
   late PageController pageController;
+  var titles = ["Ürünler", "Sepetim", "Siparişlerim", "Profilim"];
 
   @override
   void onInit() {
@@ -14,14 +15,11 @@ class MainController extends BaseController {
   }
 
   var currentIndex = 0.obs;
-
-  onTapChange(index) {
-    if (index == 4) {
-      Get.toNamed(RouteConst.login);
-    } else {
-      currentIndex.value = index;
-      pageController.animateToPage(index,
-          duration: const Duration(microseconds: 300), curve: Curves.bounceIn);
-    }
+  var title = "Anasayfa".obs;
+  onTapChange(int index) {
+    currentIndex.value = index;
+    title.value = titles[index];
+    pageController.animateToPage(index,
+        duration: const Duration(microseconds: 300), curve: Curves.bounceIn);
   }
 }

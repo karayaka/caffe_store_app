@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Ürünler"),
+        title: Obx(() => Text(ctrl.title.value)),
       ),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                   icon: Icon(Icons.shopping_basket_outlined), label: "Sepatim"),
               const BottomNavigationBarItem(
                   icon: Icon(Icons.local_shipping_outlined),
-                  label: "Siparişler"),
+                  label: "Siparişlerim"),
               const BottomNavigationBarItem(
                   icon: Icon(Icons.people), label: "Profilim")
             ]);

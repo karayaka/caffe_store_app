@@ -62,7 +62,8 @@ final ThemeData coffeStoreTheme = ThemeData(
     hoverColor: Color(0x0a000000),
     colorScheme: ColorScheme(
       primary: Color(0xff2e393d),
-      secondary: Color(0xff6e8891), //buraya markanın ikinci rengini getireceğiz
+      secondary: Color(
+          0xffe1be36), //Color(0xff6e8891), //buraya markanın ikinci rengini getireceğiz
       surface: Color(0xffffffff),
       background: Color(0xffc5cfd3),
       error: Color(0xffd32f2f),
