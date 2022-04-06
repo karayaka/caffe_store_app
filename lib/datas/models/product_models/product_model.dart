@@ -4,9 +4,9 @@ class ProductModel extends BaseServiceModel {
   int? id;
   String? name;
   String? desc;
-  double? price;
+  double price;
 
-  ProductModel({this.id, this.name, this.desc, this.price});
+  ProductModel({this.id, this.name, this.desc, this.price = 0});
 
   @override
   fromMap(Map<String, dynamic> map) => ProductModel(

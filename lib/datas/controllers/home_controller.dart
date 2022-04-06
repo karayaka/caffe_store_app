@@ -7,22 +7,41 @@ import 'package:get/get.dart';
 class HomeController extends BaseController {
   var repo = Get.find<HomeRepository>();
 
-  List<ProductModel> products = [];
+  bool nextPageLoding = false;
+
+  List<ProductModel> products = [
+    ProductModel(id: 1, name: "Kahve 1", desc: "Kahve Açıklaması", price: 12.5),
+    ProductModel(
+        id: 2,
+        name: "Kahve 2",
+        desc: "Geleneksel tük kahvesi tadında eşsiz lezzet",
+        price: 15.7),
+    ProductModel(
+        id: 2,
+        name: "Kahve 2",
+        desc: "Geleneksel tük kahvesi tadında eşsiz lezzet",
+        price: 15.7),
+  ];
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProduct();
+    //getProduct();
   }
 
   int pageID = 1;
 
   getProduct() async {
     state.value = ScreanState.loding;
-    var model =
-        prepareServiceModel<List<ProductModel>>(await repo.getProduct(pageID));
-    if (model != null) products = model;
+    try {
+      var model = prepareServiceModel<List<ProductModel>>(
+          await repo.getProduct(pageID));
+      if (model != null) products = model;
+    } catch (e) {
+      errorMessage(e.toString());
+    }
+
     state.value = ScreanState.loaded;
   }
 }
