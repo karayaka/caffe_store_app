@@ -61,7 +61,7 @@ class HomeLayout extends StatelessWidget {
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.6,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8),
             itemCount: ctrl.products.length,
@@ -71,7 +71,7 @@ class HomeLayout extends StatelessWidget {
                 item: item,
                 onClick: () {
                   Get.toNamed(RouteConst.add_basket,
-                      arguments: {"ID": item.id});
+                      arguments: {"ID": item.id, "title": item.name});
                 },
               );
             }),

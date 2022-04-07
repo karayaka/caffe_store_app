@@ -9,25 +9,13 @@ class HomeController extends BaseController {
 
   bool nextPageLoding = false;
 
-  List<ProductModel> products = [
-    ProductModel(id: 1, name: "Kahve 1", desc: "Kahve Açıklaması", price: 12.5),
-    ProductModel(
-        id: 2,
-        name: "Kahve 2",
-        desc: "Geleneksel tük kahvesi tadında eşsiz lezzet",
-        price: 15.7),
-    ProductModel(
-        id: 2,
-        name: "Kahve 2",
-        desc: "Geleneksel tük kahvesi tadında eşsiz lezzet",
-        price: 15.7),
-  ];
+  List<ProductModel> products = [];
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    //getProduct();
+    getProduct();
   }
 
   int pageID = 1;
