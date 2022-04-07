@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 class HomeController extends BaseController {
   var repo = Get.find<HomeRepository>();
 
+  bool nextPageLoding = false;
+
   List<ProductModel> products = [];
 
   @override
@@ -20,9 +22,14 @@ class HomeController extends BaseController {
 
   getProduct() async {
     state.value = ScreanState.loding;
-    var model =
-        prepareServiceModel<List<ProductModel>>(await repo.getProduct(pageID));
-    if (model != null) products = model;
+    try {
+      var model = prepareServiceModel<List<ProductModel>>(
+          await repo.getProduct(pageID));
+      if (model != null) products = model;
+    } catch (e) {
+      errorMessage(e.toString());
+    }
+
     state.value = ScreanState.loaded;
   }
 }

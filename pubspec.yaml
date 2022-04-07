@@ -35,6 +35,8 @@ dependencies:
   dio: ^4.0.4
   #state managment
   get: ^4.6.1
+  #ımage
+  cached_network_image: ^3.2.0
 
 
 dev_dependencies:

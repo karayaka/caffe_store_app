@@ -16,7 +16,7 @@ class BaseService {
 
   Dio? _dio;
   BaseService._init() {
-    final baseOptions = BaseOptions(baseUrl: Tools.baseUrl + "/api/" //
+    final baseOptions = BaseOptions(baseUrl: Tools.baseUrl + "/service/api/" //
         );
     _dio = Dio(baseOptions);
   }
@@ -25,12 +25,6 @@ class BaseService {
       String path, T model, dynamic data,
       {String? token}) async {
     try {
-      (_dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) => true;
-        return client;
-      };
       final response = await _dio?.post(path,
           data: data, options: Options(headers: {"AppKey": token}));
       return _prePareResult<T>(response, model);
@@ -42,12 +36,6 @@ class BaseService {
   Future<BaseResult> dioGet<T extends BaseServiceModel>(String path, T model,
       {Map<String, dynamic>? params, String token = ""}) async {
     try {
-      (_dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) => true;
-        return client;
-      };
       final response = await _dio?.get(path,
           queryParameters: params,
           options: Options(headers: {"AppKey": token}));

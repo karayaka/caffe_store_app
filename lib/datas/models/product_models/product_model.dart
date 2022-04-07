@@ -4,9 +4,10 @@ class ProductModel extends BaseServiceModel {
   int? id;
   String? name;
   String? desc;
-  double? price;
+  double price;
+  String? image;
 
-  ProductModel({this.id, this.name, this.desc, this.price});
+  ProductModel({this.id, this.name, this.desc, this.price = 0, this.image});
 
   @override
   fromMap(Map<String, dynamic> map) => ProductModel(
@@ -14,13 +15,10 @@ class ProductModel extends BaseServiceModel {
         name: map["name"],
         desc: map["desc"],
         price: map["price"],
+        image: map["image"],
       );
 
   @override
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
-        "desc": desc,
-        "price": price,
-      };
+  Map<String, dynamic> toMap() =>
+      {"id": id, "name": name, "desc": desc, "price": price, "image": image};
 }

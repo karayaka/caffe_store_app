@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Obx(() => Text(ctrl.title.value)),
+        title: Obx(() => _buildTitle()),
       ),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
@@ -42,4 +42,42 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildTitle() {
+    return AnimatedSwitcher(
+      duration: Duration(seconds: 1),
+      switchInCurve: Curves.easeInBack,
+      switchOutCurve: Curves.easeInBack,
+      transitionBuilder: (child, animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          axis: Axis.horizontal,
+          child: child,
+        );
+      },
+      child: Text(
+        ctrl.titles[ctrl.currentIndex.value],
+        key: Key(ctrl.currentIndex.value.toString()),
+      ),
+    );
+  }
+
+  /*Widget _buildTitle() {
+    return AnimatedSwitcher(
+      duration: Duration(seconds: 1),
+      switchInCurve: Curves.easeInBack,
+      switchOutCurve: Curves.easeInBack,
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      child: Text(
+        ctrl.titles[ctrl.currentIndex.value],
+        key: Key(ctrl.currentIndex.value.toString()),
+      ),
+    );
+  }*/
+
 }
