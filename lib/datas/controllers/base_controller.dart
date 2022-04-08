@@ -9,6 +9,10 @@ class BaseController extends GetxController {
   int pageCount = 0;
   int pageSize = 0;
 
+  bool isLoaded(Rx<ScreanState> state) {
+    return state.value == ScreanState.loaded;
+  }
+
   showSeviceAlert(ResultStatus type, String message) {
     switch (type) {
       case ResultStatus.succes:
