@@ -2,6 +2,7 @@ import 'package:caffe_store_app/core/components/cached_network_image_component.d
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/datas/controllers/add_basket_controller.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_question_model.dart';
+import 'package:caffe_store_app/datas/models/product_models/product_replay_model.dart';
 import 'package:caffe_store_app/enums/screan_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,10 +18,10 @@ class AddBasketPage extends StatelessWidget {
         title: Text(ctrl.title),
       ),
       body: Obx(() {
-        if (ctrl.state == ScreanState.loding) {
-          return CustomCircularProgress();
-        } else {
+        if (ctrl.isLoaded(ctrl.state)) {
           return _buildScrean();
+        } else {
+          return CustomCircularProgress();
         }
       }),
     );
@@ -30,7 +31,7 @@ class AddBasketPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _builTitleCard(),
+        _buildTitleCard(),
         SizedBox(
           height: 300,
           child: ListView.builder(
@@ -46,24 +47,31 @@ class AddBasketPage extends StatelessWidget {
   }
 
   Widget _buildSelection(ProductQuestionModel? question) {
+    double radioSize = (question?.productFeaturesReplies?.length ?? 0) * 50;
     return Container(
-      height: 120,
+      height: (radioSize + 18),
       child: Column(children: [
         Text(question?.questionDesc ?? ""),
         SizedBox(
-          height: 100,
+          height: radioSize,
           child: ListView.builder(
               itemCount: question?.productFeaturesReplies?.length,
               itemBuilder: (context, i) {
                 var replay = question?.productFeaturesReplies?[i];
-                return Text(replay?.replyDesc ?? "");
+                return RadioListTile<int>(
+                    title: Text(replay?.replyDesc ?? ""),
+                    value: replay!.id ?? 0,
+                    groupValue: question!.id ?? 0,
+                    onChanged: (val) {
+                      print(val);
+                    });
               }),
         )
       ]),
     );
   }
 
-  Widget _builTitleCard() {
+  Widget _buildTitleCard() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(

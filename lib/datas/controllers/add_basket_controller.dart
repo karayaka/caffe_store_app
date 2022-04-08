@@ -5,15 +5,14 @@ import 'package:caffe_store_app/enums/screan_state.dart';
 import 'package:get/get.dart';
 
 class AddBasketController extends BaseController {
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-    getProductDetail();
-  }
-
   int id = Get.arguments["ID"];
   String title = Get.arguments["title"];
+
+  @override
+  void onInit() {
+    getProductDetail();
+    super.onInit();
+  }
 
   var product = ProductDetailModel();
 

@@ -3,7 +3,7 @@ import 'package:caffe_store_app/datas/models/base_models/base_service_model.dart
 class ProductReplayModel extends BaseServiceModel {
   int? id;
   String? replyDesc;
-  String? extraCost; //double yapılaıcak
+  double? extraCost;
   bool? hasExtraCost;
 
   ProductReplayModel(
