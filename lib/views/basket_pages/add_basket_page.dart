@@ -49,14 +49,14 @@ class AddBasketPage extends StatelessWidget {
                 children: [
                   PieceSelectComponent(
                     onChange: (p) {
-                      print(p);
+                      ctrl.calculatePiece(p);
                     },
                   ),
                   Obx(
                     () => Text(
-                      "Toplam: ${ctrl.totalCoust} ₺",
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      "Toplam: ${ctrl.totalCoust.toStringAsFixed(2)} ₺",
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   ),
                   ElevatedButton(onPressed: () {}, child: Text("Sipariş Ver"))
@@ -95,7 +95,7 @@ class AddBasketPage extends StatelessWidget {
   List<Widget> _buildSelectionDetail(ProductQuestionModel? question) {
     return question!.productFeaturesReplies!.map((e) {
       return RadioListTile<int>(
-          groupValue: question.id ?? 0,
+          groupValue: question.selectedVal,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -105,6 +105,7 @@ class AddBasketPage extends StatelessWidget {
           ),
           value: e.id ?? 0,
           onChanged: (val) {
+            question.selectedVal = val ?? 0;
             ctrl.calculateTotal(question.id ?? 0, e.id ?? 0);
           });
     }).toList();

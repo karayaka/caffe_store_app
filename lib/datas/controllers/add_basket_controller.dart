@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_detail_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_detail_model.dart';
@@ -68,8 +66,17 @@ class AddBasketController extends BaseController {
       for (var item in baskets) {
         extraCoust += item.totalCoust;
       }
-      totalCoust.value = (product.price ?? 0) + extraCoust;
+      totalCoust.value = ((product.price ?? 0) + extraCoust) * piece;
       update(["select_${questionID}"]);
     }
+  }
+
+  calculatePiece(int val) {
+    piece = val;
+    double extraCoust = 0;
+    for (var item in baskets) {
+      extraCoust += item.totalCoust;
+    }
+    totalCoust.value = ((product.price ?? 0) + extraCoust) * piece;
   }
 }

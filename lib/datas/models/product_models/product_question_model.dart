@@ -4,6 +4,7 @@ import 'package:caffe_store_app/datas/models/product_models/product_replay_model
 class ProductQuestionModel extends BaseServiceModel {
   int? id;
   String? questionDesc;
+  int selectedVal = 0;
   List<ProductReplayModel>? productFeaturesReplies;
 
   ProductQuestionModel({
