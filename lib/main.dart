@@ -1,10 +1,9 @@
+import 'package:caffe_store_app/bindings/initial_binding.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:caffe_store_app/routings/route_pages.dart';
 import 'package:caffe_store_app/theme_datas/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'bindings/initial_binding.dart';
 
 void main() {
   runApp(const MyApp());
