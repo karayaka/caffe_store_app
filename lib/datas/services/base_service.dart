@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:dio/adapter.dart';
 import 'package:caffe_store_app/app_tools/tools.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_result.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_service_model.dart';
