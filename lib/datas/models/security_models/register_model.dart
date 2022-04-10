@@ -5,7 +5,7 @@ class RegisterModel extends BaseServiceModel {
   String? email;
   String? name;
   String? phoneNumber;
-  int? userStatus;
+  int userStatus;
   String? surname;
   String? userName;
   String? password;
@@ -18,7 +18,7 @@ class RegisterModel extends BaseServiceModel {
     this.phoneNumber,
     this.surname,
     this.userName,
-    this.userStatus,
+    this.userStatus = 2,
   });
 
   @override

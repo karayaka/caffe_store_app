@@ -1,4 +1,5 @@
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
+import 'package:caffe_store_app/views/security_page/forgat_pasword_page.dart';
 import 'package:caffe_store_app/views/security_page/login_page.dart';
 import 'package:caffe_store_app/views/security_page/register_page.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,15 @@ class SecurityPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(""),
+        title: Obx(() => Text(ctrl.title.value)),
       ),
       body: PageView(
+        controller: ctrl.pageController,
+        onPageChanged: ctrl.onTapChange,
         children: [
-          LoginPage(),
           RegisterPage(),
+          LoginPage(),
+          ForgatPasswordPage(),
         ],
       ),
     );
