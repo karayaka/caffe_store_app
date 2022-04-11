@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
 import 'package:caffe_store_app/theme_datas/my_colors.dart';
 import 'package:caffe_store_app/theme_datas/my_text.dart';
@@ -150,22 +151,7 @@ class RegisterPage extends StatelessWidget {
                                 .copyWith(color: MyColors.grey_40)),
                       ),
                     ),
-                    Material(
-                      color: Get.theme.primaryColor,
-                      child: InkWell(
-                          highlightColor: Colors.black.withOpacity(0.2),
-                          splashColor: Colors.black.withOpacity(0.2),
-                          onTap: () {},
-                          child: Container(
-                            height: 50,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            child: Text("Kayıt Ol",
-                                style: MyText.body2(context)!
-                                    .copyWith(color: Colors.white)),
-                          )),
-                    ),
+                    loadingButon(context),
                   ],
                 ),
               ),
@@ -190,5 +176,26 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget loadingButon(BuildContext context) {
+    if (ctrl.registerButtonLoading.value) {
+      return CustomCircularProgress();
+    } else {
+      return Material(
+        color: Get.theme.primaryColor,
+        child: InkWell(
+            highlightColor: Colors.black.withOpacity(0.2),
+            splashColor: Colors.black.withOpacity(0.2),
+            onTap: () {},
+            child: Container(
+              height: 50,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              child: Text("Kayıt Ol",
+                  style: MyText.body2(context)!.copyWith(color: Colors.white)),
+            )),
+      );
+    }
   }
 }

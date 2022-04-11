@@ -1,10 +1,12 @@
 import 'package:caffe_store_app/bindings/add_basket_binding.dart';
 import 'package:caffe_store_app/bindings/home_binding.dart';
+import 'package:caffe_store_app/bindings/register_phoneconfirme_binding.dart';
 import 'package:caffe_store_app/bindings/security_binding.dart';
 import 'package:caffe_store_app/bindings/splash_binding.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:caffe_store_app/views/basket_pages/add_basket_page.dart';
 import 'package:caffe_store_app/views/home_pages/home_page.dart';
+import 'package:caffe_store_app/views/security_page/register_phoneconfirme_page.dart';
 import 'package:caffe_store_app/views/security_page/security_page.dart';
 import 'package:caffe_store_app/views/security_page/splash_page.dart';
 import 'package:get/get.dart';
@@ -27,9 +29,16 @@ class RoutePages {
       binding: SecurityBinding(),
     ),
     GetPage(
-        name: RouteConst.add_basket,
-        page: () => AddBasketPage(),
-        binding: AddBasketBinding(),
-        fullscreenDialog: true),
+      name: RouteConst.add_basket,
+      page: () => AddBasketPage(),
+      binding: AddBasketBinding(),
+      fullscreenDialog: true,
+    ),
+    GetPage(
+      name: RouteConst.registerConfirmPhone,
+      page: () => RegisterPhoneConfirmePage(),
+      binding: RegisterPhoneConfirmeBinding(),
+      fullscreenDialog: true,
+    ),
   ];
 }

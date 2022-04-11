@@ -3,4 +3,5 @@ class RouteConst {
   static const String home = "/home";
   static const String security = "/security";
   static const String add_basket = "/addBasket";
+  static const String registerConfirmPhone = "/registerConfirmPhone";
 }

@@ -37,6 +37,8 @@ dependencies:
   get: ^4.6.1
   #ımage
   cached_network_image: ^3.2.0
+  #read SMS Otg
+  sms_otp_auto_verify: ^2.1.0
 
 
 dev_dependencies:
