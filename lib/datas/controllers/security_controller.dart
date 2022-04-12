@@ -38,6 +38,7 @@ class SecurityController extends BaseController {
   late GlobalKey<FormState> loginFormKey;
   late LoginModel loginModel;
   var loginLoading = false.obs;
+  //forgat password
 
   onTapChange(int index) {
     currentIndex.value = index;
