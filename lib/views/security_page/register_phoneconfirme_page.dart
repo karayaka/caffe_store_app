@@ -17,7 +17,7 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
         title: const Text("Numara Doğrulama"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(25.0),
+        padding: EdgeInsets.all(25.0),
         child: Card(
           child: Column(
             children: [
@@ -28,10 +28,13 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              TimerButtonComponent(
-                onPressed: () {
-                  ctrl.reSendCode();
-                },
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TimerButtonComponent(
+                  onPressed: () {
+                    ctrl.reSendCode();
+                  },
+                ),
               ),
               _buildButton(),
             ],
@@ -55,25 +58,25 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
   }
 
   Widget _builVerification() {
-    return GetBuilder<RegisterPhoneConfirmController>(
-        id: "textUpdate",
-        builder: (controller) {
-          return TextFieldPin(
-              textController: ctrl.confirmeTextController,
-              autoFocus: true,
-              codeLength: 6,
-              alignment: MainAxisAlignment.center,
-              defaultBoxSize: 46.0,
-              margin: 10,
-              selectedBoxSize: 46.0,
-              textStyle: const TextStyle(fontSize: 16),
-              /*defaultDecoration: Get. _pinPutDecoration.copyWith(
+    return Obx(() {
+      var data = ctrl.confirmedCode.value;
+      return TextFieldPin(
+          textController: ctrl.confirmeTextController,
+          autoFocus: true,
+          codeLength: 6,
+          alignment: MainAxisAlignment.center,
+          defaultBoxSize: 36.0,
+          margin: 10,
+          selectedBoxSize: 36.0,
+          textStyle: const TextStyle(fontSize: 16),
+          /*defaultDecoration: Get. _pinPutDecoration.copyWith(
               border: Border.all(
                   color: Theme.of(context).primaryColor.withOpacity(0.6))),
           selectedDecoration: _pinPutDecoration,*/
-              onChange: (code) {
-                ctrl.confirmedCode = code;
-              });
-        });
+          onChange: (code) {
+            print(code);
+            ctrl.confirmedCode.value = code;
+          });
+    });
   }
 }

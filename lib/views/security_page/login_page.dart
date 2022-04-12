@@ -1,3 +1,5 @@
+import 'package:caffe_store_app/app_tools/form_validations.dart';
+import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
 import 'package:caffe_store_app/theme_datas/my_colors.dart';
 import 'package:caffe_store_app/theme_datas/my_text.dart';
@@ -54,6 +56,10 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
+                        validator: FormValidation.notEmty,
+                        onChanged: (val) {
+                          ctrl.loginModel.userName = val;
+                        },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
                             hintText: "Telefon",
@@ -67,6 +73,10 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
+                        validator: FormValidation.notEmty,
+                        onChanged: (val) {
+                          ctrl.loginModel.password = val;
+                        },
                         obscureText: true,
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
@@ -76,22 +86,7 @@ class LoginPage extends StatelessWidget {
                                 .copyWith(color: MyColors.grey_40)),
                       ),
                     ),
-                    Material(
-                      color: Get.theme.primaryColor,
-                      child: InkWell(
-                          highlightColor: Colors.black.withOpacity(0.2),
-                          splashColor: Colors.black.withOpacity(0.2),
-                          onTap: () {},
-                          child: Container(
-                            height: 50,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            child: Text("Kayıt Ol",
-                                style: MyText.body2(context)!
-                                    .copyWith(color: Colors.white)),
-                          )),
-                    ),
+                    _buildButton(context),
                   ],
                 ),
               ),
@@ -123,5 +118,33 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildButton(BuildContext context) {
+    return Obx(() {
+      if (ctrl.loginLoading.value) {
+        return const Padding(
+          padding: EdgeInsets.all(8),
+          child: CustomCircularProgress(),
+        );
+      } else {
+        return Material(
+          color: Get.theme.primaryColor,
+          child: InkWell(
+              highlightColor: Colors.black.withOpacity(0.2),
+              splashColor: Colors.black.withOpacity(0.2),
+              onTap: () {},
+              child: Container(
+                height: 50,
+                alignment: Alignment.center,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: Text("Kayıt Ol",
+                    style:
+                        MyText.body2(context)!.copyWith(color: Colors.white)),
+              )),
+        );
+      }
+    });
   }
 }

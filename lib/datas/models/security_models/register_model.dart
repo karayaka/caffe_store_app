@@ -9,17 +9,18 @@ class RegisterModel extends BaseServiceModel {
   String? surname;
   String? userName;
   String? password;
+  String? appSinature;
 
-  RegisterModel({
-    this.id,
-    this.email,
-    this.name,
-    this.password,
-    this.phoneNumber,
-    this.surname,
-    this.userName,
-    this.userStatus = 2,
-  });
+  RegisterModel(
+      {this.id = 0,
+      this.email,
+      this.name,
+      this.password,
+      this.phoneNumber,
+      this.surname,
+      this.userName,
+      this.userStatus = 2,
+      this.appSinature = "sd"});
 
   @override
   fromMap(Map<String, dynamic> map) => RegisterModel(
@@ -31,6 +32,7 @@ class RegisterModel extends BaseServiceModel {
         surname: map["surname"],
         userName: map["userName"],
         userStatus: map["userStatus"],
+        appSinature: map["appSinature"],
       );
 
   @override
@@ -43,5 +45,6 @@ class RegisterModel extends BaseServiceModel {
         "surname": surname,
         "userName": userName,
         "userStatus": userStatus,
+        "appSinature": appSinature
       };
 }
