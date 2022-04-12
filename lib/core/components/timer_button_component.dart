@@ -21,10 +21,12 @@ class TimerButtonComponent extends StatefulWidget {
 class _TimerButtonComponentState extends State<TimerButtonComponent> {
   Timer? _timer;
   late int _percent;
+  double prnc = 0.0;
 
   @override
   void initState() {
     _percent = 120;
+    startTimer();
     super.initState();
   }
 
@@ -36,8 +38,8 @@ class _TimerButtonComponentState extends State<TimerButtonComponent> {
         children: [
           LinearProgressIndicator(
             minHeight: 10,
-            backgroundColor: Get.theme.colorScheme.primary,
-            value: (widget.start / _percent).toDouble(),
+            //backgroundColor: Get.theme.colorScheme.primary,
+            value: prnc,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -59,11 +61,14 @@ class _TimerButtonComponentState extends State<TimerButtonComponent> {
   }
 
   void startTimer() {
-    if (widget.start == 0) widget.start = _percent;
+    if (widget.start == 0) {
+      widget.start = _percent;
+    }
     const oneSec = const Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
+        prnc = (widget.start / _percent).toDouble();
         if (widget.start == 0) {
           setState(() {
             timer.cancel();

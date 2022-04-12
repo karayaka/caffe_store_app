@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/app_tools/form_validations.dart';
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
 import 'package:caffe_store_app/theme_datas/my_colors.dart';
@@ -58,7 +59,12 @@ class RegisterPage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
+                        validator: FormValidation.phoneNumberValidator,
+                        keyboardType: TextInputType.phone,
                         maxLines: 1,
+                        onChanged: (val) {
+                          ctrl.registerModel.phoneNumber = val;
+                        },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
                             hintText: "Telefon",
@@ -72,6 +78,10 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
+                        validator: FormValidation.passwordValidator,
+                        onChanged: (val) {
+                          ctrl.registerModel.password = val;
+                        },
                         obscureText: true,
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
@@ -115,6 +125,10 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
+                        validator: FormValidation.notEmty,
+                        onChanged: (val) {
+                          ctrl.registerModel.name = val;
+                        },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
                             border: InputBorder.none,
@@ -129,6 +143,10 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
+                        validator: FormValidation.notEmty,
+                        onChanged: (val) {
+                          ctrl.registerModel.surname = val;
+                        },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
                             border: InputBorder.none,
@@ -142,7 +160,14 @@ class RegisterPage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
+                        onChanged: (val) {
+                          ctrl.registerModel.email = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.emailValidator(val: val ?? "");
+                        },
                         maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(-12),
                             border: InputBorder.none,
@@ -178,24 +203,31 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget loadingButon(BuildContext context) {
-    if (ctrl.registerButtonLoading.value) {
-      return CustomCircularProgress();
-    } else {
-      return Material(
-        color: Get.theme.primaryColor,
-        child: InkWell(
-            highlightColor: Colors.black.withOpacity(0.2),
-            splashColor: Colors.black.withOpacity(0.2),
-            onTap: () {},
-            child: Container(
-              height: 50,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Text("Kayıt Ol",
-                  style: MyText.body2(context)!.copyWith(color: Colors.white)),
-            )),
-      );
-    }
-  }
+  Widget loadingButon(BuildContext context) => Obx(() {
+        if (ctrl.registerButtonLoading.value) {
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: CustomCircularProgress(),
+          );
+        } else {
+          return Material(
+            color: Get.theme.primaryColor,
+            child: InkWell(
+                highlightColor: Colors.black.withOpacity(0.2),
+                splashColor: Colors.black.withOpacity(0.2),
+                onTap: () {
+                  ctrl.registerUser();
+                },
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: Text("Kayıt Ol",
+                      style:
+                          MyText.body2(context)!.copyWith(color: Colors.white)),
+                )),
+          );
+        }
+      });
 }

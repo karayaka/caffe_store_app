@@ -1,4 +1,8 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
+import 'package:caffe_store_app/datas/models/security_models/login_result_model.dart';
+import 'package:caffe_store_app/datas/models/security_models/verify_phone_number_model.dart';
 import 'package:caffe_store_app/datas/repositorys/security_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -14,11 +18,11 @@ class RegisterPhoneConfirmController extends BaseController {
 
   var repo = Get.find<SecurityRepository>();
 
-  int ID = Get.arguments["ID"];
-  String code = Get.arguments["code"];
+  var id = Get.arguments[0];
+  var code = Get.arguments[1];
 
   var isSending = false.obs;
-  String confirmedCode = "";
+  var confirmedCode = "".obs;
 
   late TextEditingController confirmeTextController;
 
@@ -26,16 +30,19 @@ class RegisterPhoneConfirmController extends BaseController {
 
   _startListeningSms() {
     SmsVerification.startListeningSms().then((message) {
-      confirmedCode = SmsVerification.getCode(message, intRegex);
-      confirmeTextController.text = confirmedCode;
+      confirmedCode.value = SmsVerification.getCode(message, intRegex);
+      confirmeTextController.text = confirmedCode.value;
       update(["textUpdate"]);
     });
+    print(code);
   }
 
-  reSendCode() async {} //resend ID ile
+  reSendCode() async {
+    print("ReSend Code");
+  } //resend ID ile
 
   confirmeCode() {
-    if (confirmeCode == code) {
+    if (confirmedCode == code) {
       confirmeRegisterCode();
     } else {
       errorMessage("Doğrulama Kodu Hatalıdır");
@@ -43,7 +50,27 @@ class RegisterPhoneConfirmController extends BaseController {
   }
 
   confirmeRegisterCode() async {
-    var resul = await repo.reSendRegisterCode(ID);
+    try {
+      isSending.value = true;
+      var model = VerifyPhoneNumberModelModel(
+        verificationCode: code,
+        id: id,
+      );
+
+      var retVal = prepareServiceModel<LoginResultModel>(
+          await repo.confirmeRegisterCode(model));
+      isSending.value = false;
+      if (retVal != null) {
+        print(retVal.toJson());
+        Get.back<String>(result: retVal.token);
+      } else {
+        Get.back<String>();
+      }
+    } catch (e) {
+      errorMessage("Beklenmedik Bir Hata Oldu Data Sonra Tekrar Deneyin");
+      isSending.value = false;
+    }
+
     //retun teypende toke a bakılacak
   } //Confirme Code İle ID ile
 }

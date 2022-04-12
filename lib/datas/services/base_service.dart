@@ -89,7 +89,7 @@ class BaseService {
     ///data time respunse zamanı alınacak
     result.type = _prepareReultType<T>(data);
     var body = data["data"];
-    if (body != null) {
+    if (body != null && body != -1) {
       result.data = _prePareData<T>(body, model);
     }
     return result;
