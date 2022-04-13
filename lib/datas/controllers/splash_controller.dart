@@ -6,4 +6,8 @@ class SplashController extends BaseController {
     // TODO: implement onInit
     super.onInit();
   }
+
+  autoLogin() async {
+    try {} catch (e) {}
+  }
 }

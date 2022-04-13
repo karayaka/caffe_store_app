@@ -6,7 +6,7 @@ class VerifyPhoneNumberModelModel extends BaseServiceModel {
   String? verificationCode;
 
   VerifyPhoneNumberModelModel(
-      {this.id, this.phoneNumber, this.verificationCode});
+      {this.id, this.phoneNumber = "", this.verificationCode});
 
   @override
   fromMap(Map<String, dynamic> map) => VerifyPhoneNumberModelModel(

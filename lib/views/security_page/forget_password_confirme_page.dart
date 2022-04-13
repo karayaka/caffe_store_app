@@ -1,14 +1,13 @@
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/timer_button_component.dart';
-import 'package:caffe_store_app/datas/controllers/register_phoneconfirm_controller.dart';
+import 'package:caffe_store_app/datas/controllers/forget_password_confirme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 
-class RegisterPhoneConfirmePage extends StatelessWidget {
-  var ctrl = Get.find<RegisterPhoneConfirmController>();
-
-  RegisterPhoneConfirmePage({Key? key}) : super(key: key);
+class ForgetrPasswordConfirmePage extends StatelessWidget {
+  var ctrl = Get.find<ForgetPasswordConfirmeController>();
+  ForgetrPasswordConfirmePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
         title: const Text("Numara Doğrulama"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(25.0),
         child: Card(
           child: Column(
             children: [
@@ -29,7 +28,7 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
                 height: 5,
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TimerButtonComponent(
                   onPressed: () {
                     ctrl.reSendCode();
@@ -62,7 +61,6 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
   Widget _builVerification() {
     return Obx(() {
       var data = ctrl.confirmedCode.value;
-
       return TextFieldPin(
           textController: ctrl.confirmeTextController,
           autoFocus: true,
@@ -77,7 +75,6 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
                   color: Theme.of(context).primaryColor.withOpacity(0.6))),
           selectedDecoration: _pinPutDecoration,*/
           onChange: (code) {
-            print(code);
             ctrl.confirmedCode.value = code;
           });
     });

@@ -1,5 +1,5 @@
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
-import 'package:caffe_store_app/views/security_page/forgat_pasword_page.dart';
+import 'package:caffe_store_app/views/security_page/forget_pasword_page.dart';
 import 'package:caffe_store_app/views/security_page/login_page.dart';
 import 'package:caffe_store_app/views/security_page/register_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class SecurityPage extends StatelessWidget {
         children: [
           RegisterPage(),
           LoginPage(),
-          ForgatPasswordPage(),
+          ForgetPasswordPage(),
         ],
       ),
     );

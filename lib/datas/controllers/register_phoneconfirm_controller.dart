@@ -1,9 +1,12 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
+import 'package:caffe_store_app/datas/controllers/security_controller.dart';
 import 'package:caffe_store_app/datas/models/security_models/login_result_model.dart';
+import 'package:caffe_store_app/datas/models/security_models/register_result_model.dart';
 import 'package:caffe_store_app/datas/models/security_models/verify_phone_number_model.dart';
 import 'package:caffe_store_app/datas/repositorys/security_repository.dart';
+import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
@@ -32,13 +35,19 @@ class RegisterPhoneConfirmController extends BaseController {
     SmsVerification.startListeningSms().then((message) {
       confirmedCode.value = SmsVerification.getCode(message, intRegex);
       confirmeTextController.text = confirmedCode.value;
-      update(["textUpdate"]);
     });
-    print(code);
   }
 
   reSendCode() async {
-    print("ReSend Code");
+    try {
+      var model = prepareServiceModel<RegisterResultViewModel>(
+          await repo.reSendSMSCode(id));
+      if (model != null) {
+        code = model.confirmeCode;
+      }
+    } catch (e) {
+      errorMessage("Beklenmedik Bir Hata Oldu Data Sonra Tekrar Deneyin");
+    }
   } //resend ID ile
 
   confirmeCode() {
@@ -56,16 +65,14 @@ class RegisterPhoneConfirmController extends BaseController {
         verificationCode: code,
         id: id,
       );
-
-      var retVal = prepareServiceModel<LoginResultModel>(
+      var retVal = await prepareServiceModel<LoginResultModel>(
           await repo.confirmeRegisterCode(model));
-      isSending.value = false;
+
       if (retVal != null) {
-        print(retVal.toJson());
-        Get.back<String>(result: retVal.token);
-      } else {
-        Get.back<String>();
+        Get.find<SecurityController>().loginRegister(retVal.token);
+        Get.offAllNamed(RouteConst.home);
       }
+      isSending.value = false;
     } catch (e) {
       errorMessage("Beklenmedik Bir Hata Oldu Data Sonra Tekrar Deneyin");
       isSending.value = false;

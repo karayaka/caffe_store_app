@@ -56,7 +56,8 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         maxLines: 1,
-                        validator: FormValidation.notEmty,
+                        validator: FormValidation.phoneNumberValidator,
+                        keyboardType: TextInputType.number,
                         onChanged: (val) {
                           ctrl.loginModel.userName = val;
                         },
@@ -95,7 +96,9 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ctrl.jumpToPage(0);
+                    },
                     child: Text("Kayıt Ol",
                         style: MyText.subhead(context)!.copyWith(
                             color: Get.theme.colorScheme.secondary,
@@ -105,7 +108,9 @@ class LoginPage extends StatelessWidget {
                       style: MyText.subhead(context)!
                           .copyWith(color: MyColors.grey_60)),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ctrl.jumpToPage(2);
+                    },
                     child: Text("Şifre Sıfırla",
                         style: MyText.subhead(context)!.copyWith(
                             color: Get.theme.colorScheme.secondary,
@@ -133,7 +138,9 @@ class LoginPage extends StatelessWidget {
           child: InkWell(
               highlightColor: Colors.black.withOpacity(0.2),
               splashColor: Colors.black.withOpacity(0.2),
-              onTap: () {},
+              onTap: () {
+                ctrl.login();
+              },
               child: Container(
                 height: 50,
                 alignment: Alignment.center,

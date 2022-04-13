@@ -188,7 +188,9 @@ class RegisterPage extends StatelessWidget {
                       style: MyText.subhead(context)!
                           .copyWith(color: MyColors.grey_60)),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ctrl.jumpToPage(1);
+                    },
                     child: Text("Giriş Yapın",
                         style: MyText.subhead(context)!.copyWith(
                             color: Get.theme.colorScheme.secondary,

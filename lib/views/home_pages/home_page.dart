@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(RouteConst.security);
               },
-              icon: Icon(Icons.local_activity))
+              icon: Icon(Icons.local_activity)),
         ],
       ),
       bottomNavigationBar: Obx(() {

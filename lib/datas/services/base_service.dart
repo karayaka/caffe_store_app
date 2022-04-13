@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:caffe_store_app/app_tools/tools.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_result.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_service_model.dart';
 import 'package:caffe_store_app/enums/result_status.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
@@ -14,14 +17,22 @@ class BaseService {
 
   Dio? _dio;
   BaseService._init() {
-    final baseOptions = BaseOptions(baseUrl: Tools.baseUrl + "/service/api/" //
-        );
+    final baseOptions = BaseOptions(
+      //baseUrl: Tools.baseUrl + "/service/api/",
+      baseUrl: Tools.baseUrl + "/api/", //
+    );
     _dio = Dio(baseOptions);
   }
 
   Future<BaseResult> dioPost<T extends BaseServiceModel>(
       String path, T model, dynamic data,
       {String? token}) async {
+    (_dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     try {
       final response = await _dio?.post(path,
           data: data, options: Options(headers: {"AppKey": token}));
@@ -33,6 +44,12 @@ class BaseService {
 
   Future<BaseResult> dioGet<T extends BaseServiceModel>(String path, T model,
       {Map<String, dynamic>? params, String token = ""}) async {
+    (_dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     try {
       final response = await _dio?.get(path,
           queryParameters: params,
