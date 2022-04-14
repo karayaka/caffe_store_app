@@ -67,13 +67,17 @@ class SecurityRepository {
     }
   }
 
-  Future<BaseResult> resetPasswordConfirme(String phoneNumber) async {
+  Future<BaseResult> resetPasswordConfirme(
+      RegisterResultViewModel model) async {
     try {
-      BaseResult model = await BaseService.instance!
-          .dioGet<RegisterResultViewModel>(
-              "Security/ResetPassword/${phoneNumber}",
-              RegisterResultViewModel());
-      return model;
+      var formData = FormData.fromMap(model.toMap());
+      BaseResult retVal =
+          await BaseService.instance!.dioPost<RegisterResultViewModel>(
+        "Security/ResetPasswordConfirme",
+        RegisterResultViewModel(),
+        formData,
+      );
+      return retVal;
     } catch (e) {
       throw e;
     }

@@ -102,9 +102,16 @@ class SecurityController extends BaseController {
 
   forgetPassword() async {
     try {
+      forgetPasswordLoading.value = true;
       var model = prepareServiceModel<RegisterResultViewModel>(
           await repo.resetPassword(phoneNumber));
-      if (model != null) {}
+      forgetPasswordLoading.value = false;
+      if (model != null) {
+        print(model.toJson());
+        Get.toNamed(RouteConst.resetPasswordConfirmPhone,
+            arguments: [model.id, model.confirmeCode]);
+      }
+      print("route");
     } catch (e) {
       print(e.toString());
     }

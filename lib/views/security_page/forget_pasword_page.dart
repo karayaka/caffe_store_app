@@ -113,7 +113,9 @@ class ForgetPasswordPage extends StatelessWidget {
             child: InkWell(
                 highlightColor: Colors.black.withOpacity(0.2),
                 splashColor: Colors.black.withOpacity(0.2),
-                onTap: () {},
+                onTap: () {
+                  ctrl.forgetPassword();
+                },
                 child: Container(
                   height: 50,
                   alignment: Alignment.center,
