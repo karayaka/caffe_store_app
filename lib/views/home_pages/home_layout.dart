@@ -2,7 +2,6 @@ import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/product_card_component.dart';
 import 'package:caffe_store_app/datas/controllers/home_controller.dart';
 import 'package:caffe_store_app/enums/screan_state.dart';
-import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +12,7 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (ctrl.state.value == ScreanState.loding) {
+      if (ctrl.state.value == ScreanState.loading) {
         return const CustomCircularProgress();
       } else {
         return _buildList();
@@ -70,8 +69,7 @@ class HomeLayout extends StatelessWidget {
               return ProductCardComponent(
                 item: item,
                 onClick: () {
-                  Get.toNamed(RouteConst.add_basket,
-                      arguments: {"ID": item.id, "title": item.name});
+                  ctrl.routeCheck(item.id ?? 0, item.name ?? "");
                 },
               );
             }),
