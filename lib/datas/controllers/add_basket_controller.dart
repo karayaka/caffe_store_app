@@ -26,7 +26,7 @@ class AddBasketController extends BaseController {
 
   getProductDetail() async {
     try {
-      state.value = ScreanState.loding;
+      state.value = ScreanState.loading;
       try {
         var model = prepareServiceModel<ProductDetailModel>(
             await repo.getProductDetail(id));

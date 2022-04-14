@@ -21,13 +21,6 @@ class SecurityRepository {
     }
   }
 
-  Future<Null> reSendRegisterCode(int ID) async {
-    //Türü belirlecek
-    /*BaseResult model = await BaseService.instance!.dioPost<RegisterModel>(
-        "Security/Register", RegisterModel(), registerModel);*/ //resend api ID ile Confirm test edilecek birde
-    return null;
-  }
-
   Future<BaseResult> confirmeRegisterCode(
       VerifyPhoneNumberModelModel verifyModel) async {
     try {
@@ -46,6 +39,45 @@ class SecurityRepository {
       BaseResult model = await BaseService.instance!.dioPost<LoginResultModel>(
           "Security/Login", LoginResultModel(), formData);
       return model;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> reSendSMSCode(int id) async {
+    try {
+      BaseResult model = await BaseService.instance!
+          .dioGet<RegisterResultViewModel>(
+              "Security/ResendSMSCode/${id}", RegisterResultViewModel());
+      return model;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> resetPassword(String phoneNumber) async {
+    try {
+      BaseResult model = await BaseService.instance!
+          .dioGet<RegisterResultViewModel>(
+              "Security/ResetPassword/${phoneNumber}",
+              RegisterResultViewModel());
+      return model;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> resetPasswordConfirme(
+      RegisterResultViewModel model) async {
+    try {
+      var formData = FormData.fromMap(model.toMap());
+      BaseResult retVal =
+          await BaseService.instance!.dioPost<RegisterResultViewModel>(
+        "Security/ResetPasswordConfirme",
+        RegisterResultViewModel(),
+        formData,
+      );
+      return retVal;
     } catch (e) {
       throw e;
     }

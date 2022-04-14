@@ -32,7 +32,7 @@ class FormValidation {
       return "Bu Alan Boş Olamaz";
     } else if (val.isEmpty) {
       return "Bu Alan Boş Olamaz";
-    } else if (val.length != 11) {
+    } else if (val.length != 10) {
       return "Lütfen Geçerli Bir Telefon Girin";
     } else if (val[0] == "0" || val[0] == "+" || val[0] == "9") {
       return "Lütfen 0,+,9 İle Başlayan Bir Telefon Girmeyin";

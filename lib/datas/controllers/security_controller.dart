@@ -1,4 +1,5 @@
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
+import 'package:caffe_store_app/datas/controllers/main_controller.dart';
 import 'package:caffe_store_app/datas/models/security_models/login_model.dart';
 import 'package:caffe_store_app/datas/models/security_models/login_result_model.dart';
 import 'package:caffe_store_app/datas/models/security_models/register_model.dart';
@@ -26,6 +27,7 @@ class SecurityController extends BaseController {
   }
 
   var repo = Get.find<SecurityRepository>();
+  var main = Get.find<MainController>();
   var title = "Kayıt Ol".obs;
   var titles = ["Kayıt Ol", "Giriş Yap", "Şifremi Unuttum"];
   var currentIndex = 0.obs;
@@ -39,6 +41,8 @@ class SecurityController extends BaseController {
   late LoginModel loginModel;
   var loginLoading = false.obs;
   //forgat password
+  var forgetPasswordLoading = false.obs;
+  String phoneNumber = "";
 
   onTapChange(int index) {
     currentIndex.value = index;
@@ -49,8 +53,6 @@ class SecurityController extends BaseController {
     pageController.jumpToPage(i);
   }
 
-  sendConfirmeCode(String code, int id) async {}
-
   registerUser() async {
     try {
       if (registerFormKey.currentState!.validate()) {
@@ -59,13 +61,8 @@ class SecurityController extends BaseController {
         var model = await repo.register(registerModel);
         var register = prepareServiceModel<RegisterResultViewModel>(model);
         if (register != null) {
-          var retVal = await Get.toNamed(RouteConst.registerConfirmPhone,
+          Get.toNamed(RouteConst.registerConfirmPhone,
               arguments: [register.id, register.confirmeCode]);
-          if (retVal != null) {
-            print(retVal);
-            //shared ed ekelem yapılacak
-          }
-          print(register.toJson());
         }
       }
       registerButtonLoading.value = false;
@@ -80,11 +77,43 @@ class SecurityController extends BaseController {
       var model =
           prepareServiceModel<LoginResultModel>(await repo.login(loginModel));
       if (model != null) {
-        //shared Yapısı kurgulanacak
+        var main = Get.find<MainController>();
+        main.setLoginModel(loginModel);
+        main.setToken(model.token ?? "");
+        Get.offAllNamed(RouteConst.home);
       }
       loginLoading.value = false;
     } catch (e) {
       loginLoading.value = false;
+    }
+  }
+
+  loginRegister(String? token) {
+    if (token != null) {
+      var loginModel = LoginModel(
+        userName: registerModel.phoneNumber,
+        password: registerModel.password,
+      );
+      main.setLoginModel(loginModel);
+      main.setToken(token);
+      succesMessage("Giriş Başarılı");
+    }
+  }
+
+  forgetPassword() async {
+    try {
+      forgetPasswordLoading.value = true;
+      var model = prepareServiceModel<RegisterResultViewModel>(
+          await repo.resetPassword(phoneNumber));
+      forgetPasswordLoading.value = false;
+      if (model != null) {
+        print(model.toJson());
+        Get.toNamed(RouteConst.resetPasswordConfirmPhone,
+            arguments: [model.id, model.confirmeCode]);
+      }
+      print("route");
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

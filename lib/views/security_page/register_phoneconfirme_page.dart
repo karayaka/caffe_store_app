@@ -45,21 +45,24 @@ class RegisterPhoneConfirmePage extends StatelessWidget {
   }
 
   Widget _buildButton() {
-    if (ctrl.isSending.value) {
-      return const CustomCircularProgress();
-    } else {
-      return ElevatedButton(
-        child: const Text("Doğrula"),
-        onPressed: () {
-          ctrl.confirmeCode();
-        },
-      );
-    }
+    return Obx(() {
+      if (ctrl.isSending.value) {
+        return const CustomCircularProgress();
+      } else {
+        return ElevatedButton(
+          child: const Text("Doğrula"),
+          onPressed: () {
+            ctrl.confirmeCode();
+          },
+        );
+      }
+    });
   }
 
   Widget _builVerification() {
     return Obx(() {
       var data = ctrl.confirmedCode.value;
+
       return TextFieldPin(
           textController: ctrl.confirmeTextController,
           autoFocus: true,
