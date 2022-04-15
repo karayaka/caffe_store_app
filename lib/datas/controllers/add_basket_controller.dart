@@ -1,4 +1,6 @@
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
+import 'package:caffe_store_app/datas/controllers/main_controller.dart';
+import 'package:caffe_store_app/datas/models/basket_models/basket_create_model.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_detail_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_detail_model.dart';
 import 'package:caffe_store_app/datas/repositorys/home_repository.dart';
@@ -19,7 +21,7 @@ class AddBasketController extends BaseController {
 
   Rx<double> totalCoust = 0.0.obs;
   var piece = 1;
-
+  var addButtonLoading = false.obs;
   var repo = Get.find<HomeRepository>();
 
   List<BasketDetailModel> baskets = [];
@@ -78,5 +80,24 @@ class AddBasketController extends BaseController {
       extraCoust += item.totalCoust;
     }
     totalCoust.value = ((product.price ?? 0) + extraCoust) * piece;
+  }
+
+  adBasket() async {
+    try {
+      addButtonLoading.value = true;
+      var token = await Get.find<MainController>().getToken();
+      print(baskets);
+      var createModel = BasketCreateModel(
+        id: 0,
+        productID: id,
+        quantity: piece,
+        basketDetails: baskets,
+      );
+      var result =
+          prepareServiceModel(await repo.addBasket(createModel, token ?? ""));
+    } catch (e) {
+      errorMessage("Beklenmedik Bir Sorun Oluştu");
+    }
+    addButtonLoading.value = false;
   }
 }

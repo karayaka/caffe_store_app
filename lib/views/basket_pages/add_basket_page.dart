@@ -59,13 +59,26 @@ class AddBasketPage extends StatelessWidget {
                           fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  ElevatedButton(onPressed: () {}, child: Text("Sipariş Ver"))
+                  _buildSaveButton()
                 ]),
           )
         ],
       ),
     );
   }
+
+  Widget _buildSaveButton() => Obx(() {
+        if (ctrl.addButtonLoading.value) {
+          return CustomCircularProgress();
+        } else {
+          return ElevatedButton(
+            onPressed: () {
+              ctrl.adBasket();
+            },
+            child: Text("Sipariş Ver"),
+          );
+        }
+      });
 
   List<Widget> _buildQuestions() {
     var questions = ctrl.product.questions;
