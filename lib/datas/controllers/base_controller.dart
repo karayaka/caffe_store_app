@@ -8,6 +8,7 @@ class BaseController extends GetxController {
 
   int pageCount = 0;
   int pageSize = 0;
+  ResultStatus resultStatus = ResultStatus.danger;
 
   bool isLoaded(Rx<ScreanState> state) {
     return state.value == ScreanState.loaded;
@@ -72,6 +73,7 @@ class BaseController extends GetxController {
 
   I? prepareServiceModel<I>(dynamic model) {
     pageCount = model.pageCount;
+    resultStatus = model.type;
     pageSize = model.pageSize; //model ve data test edilecek!!
     if (model.message != "null") {
       showSeviceAlert(model.type, model.message);

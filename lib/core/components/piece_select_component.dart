@@ -24,7 +24,8 @@ class _PieceSelectComponentState extends State<PieceSelectComponent> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.onChange(widget.initCount);
+    widget.onChange(
+        widget.initCount); //generate olur olmaz içindeki değeri yazıyor
   }
 
   @override

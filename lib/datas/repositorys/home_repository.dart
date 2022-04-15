@@ -43,7 +43,10 @@ class HomeRepository {
   Future<BaseResult> addBasket(
       BasketCreateModel createModel, String token) async {
     try {
+      var a = createModel.toMap();
+      print(a);
       var formData = FormData.fromMap(createModel.toMap());
+
       print(formData.toString());
       BaseResult model = await BaseService.instance!.dioPost<BasketCreateModel>(
         "Basket/AddBasket",

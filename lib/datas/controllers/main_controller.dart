@@ -1,4 +1,5 @@
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
+import 'package:caffe_store_app/datas/controllers/basket_controller.dart';
 import 'package:caffe_store_app/datas/models/security_models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,9 @@ class MainController extends BaseController {
 
   onTapChange(int index) {
     currentIndex.value = index;
+    if (index == 1) {
+      Get.find<BasketController>().preparePage();
+    }
     pageController.animateToPage(index,
         duration: const Duration(microseconds: 300), curve: Curves.bounceIn);
   }

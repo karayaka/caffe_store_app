@@ -4,7 +4,9 @@ import 'package:caffe_store_app/datas/models/basket_models/basket_create_model.d
 import 'package:caffe_store_app/datas/models/basket_models/basket_detail_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_detail_model.dart';
 import 'package:caffe_store_app/datas/repositorys/home_repository.dart';
+import 'package:caffe_store_app/enums/result_status.dart';
 import 'package:caffe_store_app/enums/screan_state.dart';
+import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:get/get.dart';
 
 class AddBasketController extends BaseController {
@@ -86,7 +88,6 @@ class AddBasketController extends BaseController {
     try {
       addButtonLoading.value = true;
       var token = await Get.find<MainController>().getToken();
-      print(baskets);
       var createModel = BasketCreateModel(
         id: 0,
         productID: id,
@@ -95,6 +96,9 @@ class AddBasketController extends BaseController {
       );
       var result =
           prepareServiceModel(await repo.addBasket(createModel, token ?? ""));
+      if (resultStatus == ResultStatus.succes) {
+        Get.offAllNamed(RouteConst.home);
+      }
     } catch (e) {
       errorMessage("Beklenmedik Bir Sorun Oluştu");
     }

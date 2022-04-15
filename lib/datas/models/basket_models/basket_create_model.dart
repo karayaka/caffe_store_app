@@ -36,7 +36,6 @@ class BasketCreateModel extends BaseServiceModel {
         "id": id,
         "productID": productID,
         "quantity": quantity,
-        "basketDetails":
-            basketDetails?.map((e) => BasketDetailModel().toMap()).toList(),
+        "basketDetails": basketDetails?.map((e) => e.toMap()).toList(),
       };
 }

@@ -20,7 +20,7 @@ class AddBasketPage extends StatelessWidget {
         if (ctrl.isLoaded(ctrl.state)) {
           return _buildScrean();
         } else {
-          return CustomCircularProgress();
+          return const CustomCircularProgress();
         }
       }),
     );
@@ -41,7 +41,15 @@ class AddBasketPage extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  blurStyle: BlurStyle.outer,
+                  spreadRadius: 3,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(5),
             ),
             height: 50,
             child: Row(
@@ -52,12 +60,18 @@ class AddBasketPage extends StatelessWidget {
                       ctrl.calculatePiece(p);
                     },
                   ),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   Obx(
                     () => Text(
                       "Toplam: ${ctrl.totalCoust.toStringAsFixed(2)} ₺",
                       style: const TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold),
                     ),
+                  ),
+                  const SizedBox(
+                    width: 8,
                   ),
                   _buildSaveButton()
                 ]),
@@ -69,13 +83,13 @@ class AddBasketPage extends StatelessWidget {
 
   Widget _buildSaveButton() => Obx(() {
         if (ctrl.addButtonLoading.value) {
-          return CustomCircularProgress();
+          return const CustomCircularProgress();
         } else {
           return ElevatedButton(
             onPressed: () {
               ctrl.adBasket();
             },
-            child: Text("Sipariş Ver"),
+            child: const Text("Sepete Ekle"),
           );
         }
       });
@@ -129,7 +143,7 @@ class AddBasketPage extends StatelessWidget {
       children: [
         Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 //border: Border.all(),
                 ),
             height: 200,
@@ -145,7 +159,7 @@ class AddBasketPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "${ctrl.product.price}₺",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color(0xffe1be36)),

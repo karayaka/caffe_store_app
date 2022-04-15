@@ -6,9 +6,16 @@ class BasketListModel extends BaseServiceModel {
   String? productName;
   int? quantity;
   double? totalPrice;
+  String? desc;
 
-  BasketListModel(
-      {this.id, this.image, this.productName, this.quantity, this.totalPrice});
+  BasketListModel({
+    this.id,
+    this.image,
+    this.productName,
+    this.quantity,
+    this.totalPrice,
+    this.desc,
+  });
   @override
   fromMap(Map<String, dynamic> map) => BasketListModel(
         id: map["id"],
@@ -16,6 +23,7 @@ class BasketListModel extends BaseServiceModel {
         productName: map["productName"],
         quantity: map["quantity"],
         totalPrice: map["totalPrice"],
+        desc: map["desc"],
       );
 
   @override
@@ -24,6 +32,7 @@ class BasketListModel extends BaseServiceModel {
         "image": image,
         "productName": productName,
         "quantity": quantity,
-        "totalPrice": totalPrice
+        "totalPrice": totalPrice,
+        "desc": desc,
       };
 }

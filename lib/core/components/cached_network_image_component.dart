@@ -16,8 +16,12 @@ class CachedNetworkImageComponent extends StatelessWidget {
       return CachedNetworkImage(
         fit: fit,
         imageUrl: "${Tools.baseUrl}/assets/productImage/${url}",
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        placeholder: (context, url) {
+          return const Center(
+            child: LinearProgressIndicator(),
+          );
+        },
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       );
     }
   }

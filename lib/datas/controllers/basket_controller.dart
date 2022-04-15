@@ -9,25 +9,29 @@ class BasketController extends BaseController {
   var repo = Get.find<HomeRepository>();
 
   var isLogined = false.obs;
+  var basketListLoading = false.obs;
 
   List<BasketListModel> baskets = [];
 
   @override
   void onInit() async {
-    await preparePage();
+    preparePage();
     super.onInit();
   }
 
   preparePage() async {
     var token = await Get.find<MainController>().getToken();
     if (token != null) {
+      isLogined.value = true;
       getPage(token);
+    } else {
+      isLogined.value = true;
     }
   }
 
   void getPage(String token) async {
     try {
-      state.value = ScreanState.loading;
+      basketListLoading.value = true;
       var model = prepareServiceModel<List<BasketListModel>>(
           await repo.getBaskets(token));
       if (model != null) {
@@ -36,6 +40,6 @@ class BasketController extends BaseController {
     } catch (e) {
       errorMessage(e.toString());
     }
-    state.value = ScreanState.loaded;
+    basketListLoading.value = false;
   }
 }

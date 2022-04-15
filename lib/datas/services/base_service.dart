@@ -34,8 +34,15 @@ class BaseService {
       return client;
     };
     try {
-      final response = await _dio?.post(path,
-          data: data, options: Options(headers: {"AppKey": token}));
+      final response = await _dio?.post(
+        path,
+        data: data,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer  ${token}",
+          },
+        ),
+      );
       return _prePareResult<T>(response, model);
     } catch (e) {
       throw e;
@@ -51,9 +58,15 @@ class BaseService {
       return client;
     };
     try {
-      final response = await _dio?.get(path,
-          queryParameters: params,
-          options: Options(headers: {"AppKey": token}));
+      final response = await _dio?.get(
+        path,
+        queryParameters: params,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer  ${token}",
+          },
+        ),
+      );
 
       return _prePareResult<T>(response, model);
     } catch (e) {
@@ -106,7 +119,8 @@ class BaseService {
     ///data time respunse zamanı alınacak
     result.type = _prepareReultType<T>(data);
     var body = data["data"];
-    if (body != null && body != -1) {
+    if (body != null && body != -1 && body != 1) {
+      //boş data kısmı atlanacak
       result.data = _prePareData<T>(body, model);
     }
     return result;
