@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.center,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child: Text("Kayıt Ol",
+                child: Text("Giriş",
                     style:
                         MyText.body2(context)!.copyWith(color: Colors.white)),
               )),
