@@ -130,9 +130,10 @@ class BasketPage extends StatelessWidget {
                     children: [
                       PieceSelectComponent(
                         initCount: basket.quantity ?? 0,
-                        onChange: (val) {
+                        onChange: (val) async {
                           if (val != basket.quantity) {
-                            ctrl.changeBasketQuantity(basket.id ?? 0, val);
+                            await ctrl.changeBasketQuantity(
+                                basket.id ?? 0, val);
                           }
                         },
                       ),

@@ -76,7 +76,7 @@ class BasketController extends BaseController {
     }
   }
 
-  changeBasketQuantity(int id, int quantity) async {
+  Future changeBasketQuantity(int id, int quantity) async {
     try {
       var change = BasketChangeQuantityModel(
         id: id,
