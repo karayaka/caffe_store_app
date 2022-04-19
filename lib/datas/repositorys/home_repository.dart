@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/core/component_models/select_component_model.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_result.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_change_quantity_model.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_create_model.dart';
@@ -57,10 +58,39 @@ class HomeRepository {
     }
   }
 
-  Future<BaseResult> deleteBasket(int ID, String token) {
+  Future<BaseResult> deleteBasket(int ID, String token) async {
     try {
-      return BaseService.instance!.dioGet<BasketListModel>(
-          "Basket/DeleteBasket/${ID}", BasketListModel());
+      return await BaseService.instance!.dioGet<BasketListModel>(
+          "Basket/DeleteBasket/${ID}", BasketListModel(),
+          token: token);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getProvidence(String token) async {
+    try {
+      return await BaseService.instance!.dioGet<SelectComponentModel>(
+          "Definitions/GetProvince", SelectComponentModel(),
+          token: token);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getDistrict(int ID) async {
+    try {
+      return await BaseService.instance!.dioGet<SelectComponentModel>(
+          "Defination/GetDistrict/${ID}", SelectComponentModel());
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getNeighborhood(int ID) async {
+    try {
+      return await BaseService.instance!.dioGet<SelectComponentModel>(
+          "Defination/GetNeighborhood/${ID}", SelectComponentModel());
     } catch (e) {
       throw e;
     }

@@ -42,7 +42,6 @@ class CustomSelectComponent extends StatelessWidget {
           : BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
             ),
       child: ListTile(
         title: Text(
@@ -52,18 +51,42 @@ class CustomSelectComponent extends StatelessWidget {
     );
   }
 
+  SelectComponentModel? getSelectedValue() {
+    if (selectedId == null) {
+      return null;
+    } else if (items.any((element) => element.id == selectedId)) {
+      return items.firstWhere((e) => e.id == selectedId);
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<SelectComponentModel>(
-      selectedItem: (selectedId != null)
-          ? items.firstWhere((e) => e.id == selectedId)
-          : null,
+      selectedItem: getSelectedValue(),
       mode: Mode.BOTTOM_SHEET,
       popupBackgroundColor: Colors.white,
-
-      dropdownSearchDecoration: InputDecoration(
-        border: InputBorder.none,
-        //labelStyle: textStyle,
+      searchFieldProps: TextFieldProps(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          decoration: const InputDecoration(
+              hintText: "   Ara",
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 0.5),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 0.5),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 0.5),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 0.5),
+              ))),
+      dropdownSearchDecoration: const InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.greenAccent, width: 1),
+        ),
       ),
       items: items, //DropDownDataları Getirilcek
       showSearchBox: true,
