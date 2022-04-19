@@ -1,5 +1,6 @@
 import 'package:caffe_store_app/app_tools/form_validations.dart';
 import 'package:caffe_store_app/core/component_models/select_component_model.dart';
+import 'package:caffe_store_app/core/components/custom_radio_component.dart';
 import 'package:caffe_store_app/core/components/custom_select_component.dart';
 import 'package:caffe_store_app/datas/controllers/add_order_controller.dart';
 import 'package:caffe_store_app/theme_datas/my_colors.dart';
@@ -20,6 +21,11 @@ class AdressFormLayout extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              CustomRadioComponent(
+                onChange: (val) {
+                  print(val);
+                },
+              ),
               Container(
                 height: 50,
                 alignment: Alignment.centerLeft,
@@ -36,15 +42,8 @@ class AdressFormLayout extends StatelessWidget {
                           .copyWith(color: MyColors.grey_40)),
                 ),
               ),
+
               //search componen tamam sitillendirme yapılacak
-              CustomSelectComponent(
-                dropdownLabel: "Deneme",
-                items: SelectComponentModel().fakeDate(),
-                onChange: (val) {
-                  print(val.toString());
-                },
-                selectedId: 1,
-              )
             ],
           ),
         ),
