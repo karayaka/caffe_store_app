@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 
 class CachedNetworkImageComponent extends StatelessWidget {
   String url = "";
+  double? width;
+  double? height;
   BoxFit? fit = BoxFit.fitWidth;
-  CachedNetworkImageComponent({Key? key, required this.url, this.fit})
-      : super(key: key);
+  CachedNetworkImageComponent({
+    Key? key,
+    required this.url,
+    this.fit,
+    this.height,
+    this.width,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +21,8 @@ class CachedNetworkImageComponent extends StatelessWidget {
       return Icon(Icons.error);
     } else {
       return CachedNetworkImage(
+        width: width,
+        height: height,
         fit: fit,
         imageUrl: "${Tools.baseUrl}/assets/productImage/${url}",
         placeholder: (context, url) {

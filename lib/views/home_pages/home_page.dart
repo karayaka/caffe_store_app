@@ -26,21 +26,31 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Obx(() {
+        var color = Get.theme.primaryColor;
         return BottomNavigationBar(
             onTap: ctrl.onTapChange,
             currentIndex: ctrl.currentIndex.value,
             items: [
               BottomNavigationBarItem(
-                  backgroundColor: Get.theme.primaryColor,
-                  icon: const Icon(Icons.home_outlined),
-                  label: "Ana Sayfa"),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_basket_outlined), label: "Sepatim"),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.local_shipping_outlined),
-                  label: "Siparişlerim"),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.people), label: "Profilim")
+                backgroundColor: color,
+                icon: const Icon(Icons.home_outlined),
+                label: "Ana Sayfa",
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: color,
+                icon: const Icon(Icons.shopping_basket_outlined),
+                label: "Sepetim",
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: Get.theme.primaryColor,
+                icon: const Icon(Icons.local_shipping_outlined),
+                label: "Siparişlerim",
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: Get.theme.primaryColor,
+                icon: const Icon(Icons.people),
+                label: "Profilim",
+              )
             ]);
       }),
       body: PageView(

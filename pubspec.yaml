@@ -41,6 +41,8 @@ dependencies:
   sms_otp_auto_verify: ^2.1.0
   #shared_preferences
   shared_preferences: ^2.0.13
+  #DropDown
+  dropdown_search: ^2.0.1
 
 
 dev_dependencies:

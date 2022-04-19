@@ -6,6 +6,7 @@ class BasketListModel extends BaseServiceModel {
   String? productName;
   int? quantity;
   double? totalPrice;
+  double? unitPrice;
   String? desc;
 
   BasketListModel({
@@ -14,6 +15,7 @@ class BasketListModel extends BaseServiceModel {
     this.productName,
     this.quantity,
     this.totalPrice,
+    this.unitPrice,
     this.desc,
   });
   @override
@@ -23,6 +25,7 @@ class BasketListModel extends BaseServiceModel {
         productName: map["productName"],
         quantity: map["quantity"],
         totalPrice: map["totalPrice"],
+        unitPrice: map["unitPrice"],
         desc: map["desc"],
       );
 
@@ -34,5 +37,6 @@ class BasketListModel extends BaseServiceModel {
         "quantity": quantity,
         "totalPrice": totalPrice,
         "desc": desc,
+        "unitPrice": unitPrice,
       };
 }

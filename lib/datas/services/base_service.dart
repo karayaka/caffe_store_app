@@ -18,8 +18,8 @@ class BaseService {
   Dio? _dio;
   BaseService._init() {
     final baseOptions = BaseOptions(
-      //baseUrl: Tools.baseUrl + "/service/api/",
-      baseUrl: Tools.baseUrl + "/api/", //
+      baseUrl: Tools.baseUrl + "/service/api/",
+      //baseUrl: Tools.baseUrl + "/api/", //
     );
     _dio = Dio(baseOptions);
   }
