@@ -37,7 +37,7 @@ class AddOrderPage extends StatelessWidget {
             ],
             controlsBuilder: (context, details) {
               return Row(children: [
-                ElevatedButton(
+                /*ElevatedButton(
                   child: const Text("Geri"),
                   onPressed: () {
                     ctrl.onStepCancel();
@@ -45,7 +45,7 @@ class AddOrderPage extends StatelessWidget {
                 ),
                 const SizedBox(
                   width: 10,
-                ),
+                ),*/
                 ElevatedButton(
                   child: const Text("İptal"),
                   onPressed: () {

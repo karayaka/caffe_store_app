@@ -66,7 +66,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
         onChange: (val) async {
           if (val != null) {
             setState(() {
-              widget.showDistrict = 1;
+              widget.showNeighborhood = 1;
             });
             widget.result.districtID = val.id;
             widget.neighborhoodes = await widget.getNeighborhood!(val.id);
@@ -82,6 +82,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
   }
 
   Widget _buildNeighborhood() {
+    print(widget.showDistrict);
     if (widget.showNeighborhood == 0) {
       return Container();
     } else if (widget.showNeighborhood == 1) {

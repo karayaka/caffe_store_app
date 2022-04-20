@@ -28,7 +28,7 @@ class CustomSelectComponent extends StatelessWidget {
             : ListTile(
                 contentPadding: EdgeInsets.all(0),
                 title: Text(
-                  item?.value ?? "",
+                  item?.text ?? "",
                 ),
               ));
   }
@@ -45,7 +45,7 @@ class CustomSelectComponent extends StatelessWidget {
             ),
       child: ListTile(
         title: Text(
-          item.value ?? "",
+          item.text ?? "",
         ),
       ),
     );
@@ -65,7 +65,7 @@ class CustomSelectComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownSearch<SelectComponentModel>(
       selectedItem: getSelectedValue(),
-      mode: Mode.BOTTOM_SHEET,
+      mode: Mode.DIALOG,
       popupBackgroundColor: Colors.white,
       searchFieldProps: TextFieldProps(
           padding: EdgeInsets.symmetric(horizontal: 12),
@@ -83,11 +83,7 @@ class CustomSelectComponent extends StatelessWidget {
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black, width: 0.5),
               ))),
-      dropdownSearchDecoration: const InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.greenAccent, width: 1),
-        ),
-      ),
+      dropdownSearchDecoration: const InputDecoration(border: InputBorder.none),
       items: items, //DropDownDataları Getirilcek
       showSearchBox: true,
       autoValidateMode: AutovalidateMode.onUserInteraction,

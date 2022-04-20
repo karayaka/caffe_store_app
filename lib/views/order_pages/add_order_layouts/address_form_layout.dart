@@ -28,25 +28,10 @@ class AdressFormLayout extends StatelessWidget {
                   ctrl.changeOrderTypeStatus(val);
                 },
               ),
-              _buildAdressForm(context),
-              Container(
-                height: 50,
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  maxLines: 1,
-                  validator: FormValidation.notEmty,
-                  onChanged: (val) {},
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(-12),
-                      border: InputBorder.none,
-                      hintText: "AdresDetail",
-                      hintStyle: MyText.body1(context)!
-                          .copyWith(color: MyColors.grey_40)),
-                ),
+              const SizedBox(
+                height: 10,
               ),
-
-              //search componen tamam sitillendirme yapılacak
+              _buildAdressForm(context),
             ],
           ),
         ),
@@ -60,32 +45,45 @@ class AdressFormLayout extends StatelessWidget {
       if (ctrl.lodingFormAdress.value) {
         return CustomCircularProgress();
       } else {
-        return Visibility(
-          visible: ctrl.showAdressForm.value,
-          child: Column(children: [
-            AdressSelectComponent(
-              province: ctrl.provinces,
-              getDistrict: ctrl.getDistrict,
-              getNeighborhood: ctrl.getNeighborhood,
-              onChange: (val) {},
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Visibility(
+              visible: ctrl.showAdressForm.value,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Adres Bilgileri",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    AdressSelectComponent(
+                      province: ctrl.provinces,
+                      getDistrict: ctrl.getDistrict,
+                      getNeighborhood: ctrl.getNeighborhood,
+                      onChange: (val) {},
+                    ),
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        maxLines: 1,
+                        validator: FormValidation.notEmty,
+                        onChanged: (val) {},
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: OutlineInputBorder(),
+                            hintText: "AdresDetail",
+                            hintStyle: TextStyle()),
+                      ),
+                    )
+                  ]),
             ),
-            Container(
-              height: 50,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                maxLines: 1,
-                validator: FormValidation.notEmty,
-                onChanged: (val) {},
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(-12),
-                    border: InputBorder.none,
-                    hintText: "AdresDetail",
-                    hintStyle: MyText.body1(context)!
-                        .copyWith(color: MyColors.grey_40)),
-              ),
-            )
-          ]),
+          ),
         );
       }
     });
