@@ -71,26 +71,32 @@ class HomeRepository {
   Future<BaseResult> getProvidence(String token) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-          "Definitions/GetProvince", SelectComponentModel(),
+          "Defination/GetProvince", SelectComponentModel(),
           token: token);
     } catch (e) {
       throw e;
     }
   }
 
-  Future<BaseResult> getDistrict(int ID) async {
+  Future<BaseResult> getDistrict(String token, int id) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-          "Defination/GetDistrict/${ID}", SelectComponentModel());
+        "Defination/GetDistrict/${id}",
+        SelectComponentModel(),
+        token: token,
+      );
     } catch (e) {
       throw e;
     }
   }
 
-  Future<BaseResult> getNeighborhood(int ID) async {
+  Future<BaseResult> getNeighborhood(String token, int id) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-          "Defination/GetNeighborhood/${ID}", SelectComponentModel());
+        "Defination/GetNeighborhood/${id}",
+        SelectComponentModel(),
+        token: token,
+      );
     } catch (e) {
       throw e;
     }

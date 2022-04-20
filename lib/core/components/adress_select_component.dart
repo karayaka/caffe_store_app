@@ -44,6 +44,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
             setState(() {
               widget.showDistrict = 2;
             });
+            widget.onChange!(widget.result);
           },
           selectedId: widget.result.provinceID,
         ),
@@ -72,6 +73,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
             setState(() {
               widget.showNeighborhood = 2;
             });
+            widget.onChange!(widget.result);
           }
         },
         selectedId: widget.result.districtID,
@@ -90,6 +92,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
           dropdownLabel: "Mahalle",
           onChange: (val) {
             widget.result.neighborhoodID = val.id;
+            widget.onChange!(widget.result);
           },
           selectedId: widget.result.neighborhoodID);
     }
