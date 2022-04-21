@@ -71,8 +71,22 @@ class HomeRepository {
   Future<BaseResult> getProvidence(String token) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-          "Defination/GetProvince", SelectComponentModel(),
-          token: token);
+        "Defination/GetProvince",
+        SelectComponentModel(),
+        token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getPeriot(String token) async {
+    try {
+      return await BaseService.instance!.dioGet<SelectComponentModel>(
+        "Defination/GetProvince",
+        SelectComponentModel(),
+        token: token,
+      );
     } catch (e) {
       throw e;
     }

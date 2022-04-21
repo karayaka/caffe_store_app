@@ -11,12 +11,13 @@ class AddOrderController extends BaseController {
   var orderCreateModel = OrderCreateModel();
   var showAdressForm = false.obs;
   List<SelectComponentModel> provinces = [];
+  List<SelectComponentModel> periots = [];
   var lodingFormAdress = false.obs;
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProvinces();
+    _formLoader();
   }
 
   var adressFormKey = GlobalKey<FormState>();
@@ -39,9 +40,15 @@ class AddOrderController extends BaseController {
     showAdressForm.value = val == 1;
   }
 
+  _formLoader() async {
+    lodingFormAdress.value = true;
+    await getProvinces();
+    await getPeriot();
+    lodingFormAdress.value = false;
+  }
+
   Future getProvinces() async {
     try {
-      lodingFormAdress.value = true;
       var token = await Get.find<MainController>().getToken();
       var model = prepareServiceModel<List<SelectComponentModel>>(
           await repo.getProvidence(token ?? ""));
@@ -49,7 +56,21 @@ class AddOrderController extends BaseController {
       if (model != null) {
         provinces = model;
       }
-      lodingFormAdress.value = false;
+    } catch (e) {
+      errorMessage("Bir Sorun Oluştu");
+    }
+  }
+
+// bualana balılacal
+  Future getPeriot() async {
+    try {
+      var token = await Get.find<MainController>().getToken();
+      var model = prepareServiceModel<List<SelectComponentModel>>(
+          await repo.getPeriot(token ?? ""));
+
+      if (model != null) {
+        periots = model;
+      }
     } catch (e) {
       errorMessage("Bir Sorun Oluştu");
     }

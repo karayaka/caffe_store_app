@@ -8,15 +8,24 @@ class OrderCreateModel extends BaseServiceModel {
   int? neighborhoodID;
   int? deliveryPeriotID;
   String? adress;
+  String? cardNumber;
+  String? cardDate;
+  String? cvv;
+  String? cardNameSurname;
 
-  OrderCreateModel(
-      {this.id,
-      this.adress,
-      this.deliveryPeriotID,
-      this.districtID = 0,
-      this.neighborhoodID = 0,
-      this.provinceID = 0,
-      this.orderTypeStatus});
+  OrderCreateModel({
+    this.id,
+    this.adress,
+    this.deliveryPeriotID,
+    this.districtID = 0,
+    this.neighborhoodID = 0,
+    this.provinceID = 0,
+    this.cardDate,
+    this.cardNameSurname,
+    this.cardNumber,
+    this.cvv,
+    this.orderTypeStatus,
+  });
 
   @override
   fromMap(Map<String, dynamic> map) => OrderCreateModel(
@@ -27,6 +36,10 @@ class OrderCreateModel extends BaseServiceModel {
         neighborhoodID: map["neighborhoodID"],
         orderTypeStatus: map["orderTypeStatus"],
         provinceID: map["provinceID"],
+        cardDate: map["cardDate"],
+        cardNameSurname: map["cardNameSurname"],
+        cardNumber: map["cardNumber"],
+        cvv: map["cvv"],
       );
 
   @override
@@ -38,5 +51,9 @@ class OrderCreateModel extends BaseServiceModel {
         "neighborhoodID": neighborhoodID,
         "orderTypeStatus": orderTypeStatus,
         "provinceID": provinceID,
+        "cardDate": cardDate,
+        "cardNameSurname": cardNameSurname,
+        "cardNumber": cardNumber,
+        "cvv": cvv,
       };
 }
