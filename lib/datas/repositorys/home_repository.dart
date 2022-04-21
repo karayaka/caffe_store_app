@@ -71,7 +71,7 @@ class HomeRepository {
   Future<BaseResult> getProvidence(String token) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-        "Defination/GetProvince",
+        "Defination/GetPeriot",
         SelectComponentModel(),
         token: token,
       );
