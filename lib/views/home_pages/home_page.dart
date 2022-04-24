@@ -17,13 +17,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Obx(() => _buildTitle()),
-        actions: [
+        /*actions: [
           IconButton(
               onPressed: () {
                 Get.toNamed(RouteConst.security);
               },
               icon: Icon(Icons.local_activity)),
-        ],
+        ],*/
       ),
       bottomNavigationBar: Obx(() {
         var color = Get.theme.primaryColor;
@@ -79,23 +79,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-  /*Widget _buildTitle() {
-    return AnimatedSwitcher(
-      duration: Duration(seconds: 1),
-      switchInCurve: Curves.easeInBack,
-      switchOutCurve: Curves.easeInBack,
-      transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-      child: Text(
-        ctrl.titles[ctrl.currentIndex.value],
-        key: Key(ctrl.currentIndex.value.toString()),
-      ),
-    );
-  }*/
-
 }

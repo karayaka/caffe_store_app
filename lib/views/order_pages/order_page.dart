@@ -1,10 +1,160 @@
+import 'package:caffe_store_app/core/components/cached_network_image_component.dart';
+import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
+import 'package:caffe_store_app/core/components/order_progress_component.dart';
+import 'package:caffe_store_app/core/components/order_status_select_component.dart';
+import 'package:caffe_store_app/datas/controllers/order_controller.dart';
+import 'package:caffe_store_app/datas/models/order_models/order_list_model.dart';
+import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderPage extends StatelessWidget {
-  const OrderPage({Key? key}) : super(key: key);
+  var ctrl = Get.find<OrderController>();
+  OrderPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Obx(() {
+      if (ctrl.showLoginPage.value) {
+        return Center(
+          child: ElevatedButton(
+            child: const Text("Giriş/Kayıt"),
+            onPressed: () {
+              Get.toNamed(RouteConst.security);
+            },
+          ),
+        );
+      } else {
+        return _buildPage();
+      }
+    });
+  }
+
+  Widget _buildPage() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: OrderStatusSelectComponent(
+              onChange: (int val) {
+                ctrl.getPage(id: val);
+              },
+            ),
+          ),
+          Expanded(child: _listLoader()),
+        ],
+      ),
+    );
+  }
+
+  Widget _listLoader() {
+    return Obx(() {
+      if (ctrl.pageLoding.value) {
+        return CustomCircularProgress();
+      } else {
+        return Padding(
+          padding: EdgeInsets.all(4),
+          child: ListView.builder(
+            itemCount: ctrl.orders.length,
+            itemBuilder: (context, i) {
+              var order = ctrl.orders[i];
+              return _buildOrderItem(order);
+            },
+          ),
+        );
+      }
+    });
+  }
+
+  Widget _buildOrderItem(OrderListModel order) {
+    return Card(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _cardHeaderBuilder(order),
+          ),
+          const Divider(),
+          _cardDetailBuilder(order),
+        ],
+      ),
+    );
+  }
+
+  Widget _cardDetailBuilder(OrderListModel order) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 100,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: order.baskets?.length,
+          itemBuilder: (context, i) {
+            var basket = order.baskets?[i];
+            return Column(
+              children: [
+                CachedNetworkImageComponent(
+                  url: basket?.image ?? "",
+                  width: 60,
+                  height: 60,
+                ),
+                Text(
+                  "${basket?.productName}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "${basket?.totalPrice} ₺",
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                )
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _cardHeaderBuilder(OrderListModel order) {
+    return SizedBox(
+      height: 50,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Sipariş Kodu: ${order.orderCode}",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              OrderProgressComponent(),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              Text("Adet: ${order.productCount}"),
+              const SizedBox(
+                width: 20,
+              ),
+              Text("Toplam: ${order.orderTotal} ₺"),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

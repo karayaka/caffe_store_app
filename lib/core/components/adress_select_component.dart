@@ -29,11 +29,18 @@ class AdressSelectComponent extends StatefulWidget {
 
 class _AdressSelectComponentState extends State<AdressSelectComponent> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.onChange!(widget.result);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomSelectComponent(
-          dropdownLabel: "İl",
+          dropdownLabel: "İl Seçin",
           items: widget.province,
           onChange: (val) async {
             setState(() {
@@ -62,7 +69,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
     } else {
       return CustomSelectComponent(
         items: widget.districtes,
-        dropdownLabel: "İlçe",
+        dropdownLabel: "İlçe Seçin",
         onChange: (val) async {
           if (val != null) {
             setState(() {
@@ -90,7 +97,7 @@ class _AdressSelectComponentState extends State<AdressSelectComponent> {
     } else {
       return CustomSelectComponent(
           items: widget.neighborhoodes,
-          dropdownLabel: "Mahalle",
+          dropdownLabel: "Mahalle Seçin",
           onChange: (val) {
             widget.result.neighborhoodID = val.id;
             widget.onChange!(widget.result);
