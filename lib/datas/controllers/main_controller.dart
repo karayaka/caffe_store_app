@@ -50,13 +50,14 @@ class MainController extends BaseController {
     _loginModel = model;
   }
 
-  Future<LoginModel> getLoginModel() async {
+  Future<LoginModel?> getLoginModel() async {
     if (_loginModel.password != "") {
       return _loginModel;
     } else {
       var preferences = await SharedPreferences.getInstance();
       String? str = preferences.getString("sesion");
-      return LoginModel().fromJson(str!);
+      if (str == null) return null;
+      return LoginModel().fromJson(str);
     }
   }
 }
