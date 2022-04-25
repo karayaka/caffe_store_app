@@ -25,7 +25,7 @@ class ProductCardComponent extends StatelessWidget {
           item.name ?? "",
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 3),
         Expanded(
           child: Text(
             item.desc ?? "",

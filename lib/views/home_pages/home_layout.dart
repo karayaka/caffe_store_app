@@ -60,7 +60,7 @@ class HomeLayout extends StatelessWidget {
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.6,
+                childAspectRatio: 0.55,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8),
             itemCount: ctrl.products.length,

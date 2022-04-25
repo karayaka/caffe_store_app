@@ -52,29 +52,31 @@ class AddBasketPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
             ),
             height: 50,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  PieceSelectComponent(
-                    onChange: (p) {
-                      ctrl.calculatePiece(p);
-                    },
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Obx(
-                    () => Text(
-                      "Toplam: ${ctrl.totalCoust.toStringAsFixed(2)} ₺",
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
+            child: FittedBox(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    PieceSelectComponent(
+                      onChange: (p) {
+                        ctrl.calculatePiece(p);
+                      },
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  _buildSaveButton()
-                ]),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Obx(
+                      () => Text(
+                        "Toplam: ${ctrl.totalCoust.toStringAsFixed(2)} ₺",
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    _buildSaveButton()
+                  ]),
+            ),
           )
         ],
       ),

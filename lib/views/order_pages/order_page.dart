@@ -88,33 +88,44 @@ class OrderPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 100,
+        height: 110,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: order.baskets?.length,
           itemBuilder: (context, i) {
             var basket = order.baskets?[i];
-            return Column(
-              children: [
-                CachedNetworkImageComponent(
-                  url: basket?.image ?? "",
-                  width: 60,
-                  height: 60,
+            return InkWell(
+              onTap: () {
+                Get.toNamed(RouteConst.add_basket, arguments: {
+                  "ID": basket?.id,
+                  "title": basket?.productName
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    CachedNetworkImageComponent(
+                      url: basket?.image ?? "",
+                      width: 60,
+                      height: 60,
+                    ),
+                    Text(
+                      "${basket?.productName}",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "(${basket?.quantity})/${basket?.totalPrice} ₺",
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
+                    )
+                  ],
                 ),
-                Text(
-                  "${basket?.productName}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "${basket?.totalPrice} ₺",
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
-                )
-              ],
+              ),
             );
           },
         ),
@@ -131,14 +142,16 @@ class OrderPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Sipariş Kodu: ${order.orderCode}",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              FittedBox(
+                child: Text(
+                  "Kod: ${order.orderCode}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              OrderProgressComponent(),
+              OrderProgressComponent(orderStatus: order.orderStatus ?? 0),
             ],
           ),
           const SizedBox(

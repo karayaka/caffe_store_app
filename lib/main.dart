@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: coffeStoreTheme,
       initialBinding: InitialBinding(),
       getPages: RoutePages.pages,
-      initialRoute: RouteConst.home,
+      initialRoute: RouteConst.splash,
     );
   }
 }

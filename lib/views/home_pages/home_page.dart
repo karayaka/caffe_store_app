@@ -1,5 +1,4 @@
 import 'package:caffe_store_app/datas/controllers/main_controller.dart';
-import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:caffe_store_app/views/basket_pages/basket_page.dart';
 import 'package:caffe_store_app/views/home_pages/home_layout.dart';
 import 'package:caffe_store_app/views/order_pages/order_page.dart';

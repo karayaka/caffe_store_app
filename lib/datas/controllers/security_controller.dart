@@ -73,16 +73,18 @@ class SecurityController extends BaseController {
 
   login() async {
     try {
-      loginLoading.value = true;
-      var model =
-          prepareServiceModel<LoginResultModel>(await repo.login(loginModel));
-      if (model != null) {
-        var main = Get.find<MainController>();
-        main.setLoginModel(loginModel);
-        main.setToken(model.token ?? "");
-        Get.offAllNamed(RouteConst.home);
+      if (loginFormKey.currentState!.validate()) {
+        loginLoading.value = true;
+        var model =
+            prepareServiceModel<LoginResultModel>(await repo.login(loginModel));
+        if (model != null) {
+          var main = Get.find<MainController>();
+          main.setLoginModel(loginModel);
+          main.setToken(model.token ?? "");
+          Get.offAllNamed(RouteConst.home);
+        }
+        loginLoading.value = false;
       }
-      loginLoading.value = false;
     } catch (e) {
       loginLoading.value = false;
     }
@@ -102,6 +104,10 @@ class SecurityController extends BaseController {
 
   forgetPassword() async {
     try {
+      if (phoneNumber == "") {
+        errorMessage("Telefon NUmarası Girin");
+        return;
+      }
       forgetPasswordLoading.value = true;
       var model = prepareServiceModel<RegisterResultViewModel>(
           await repo.resetPassword(phoneNumber));

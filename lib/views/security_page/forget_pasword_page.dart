@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/app_tools/form_validations.dart';
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/datas/controllers/security_controller.dart';
 import 'package:caffe_store_app/theme_datas/my_colors.dart';
@@ -56,6 +57,7 @@ class ForgetPasswordPage extends StatelessWidget {
                         ctrl.phoneNumber = val;
                       },
                       maxLines: 1,
+                      validator: FormValidation.phoneNumberValidator,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(-12),

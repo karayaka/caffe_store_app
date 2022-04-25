@@ -24,7 +24,7 @@ class RoutePages {
     ),
     GetPage(
       name: RouteConst.splash,
-      page: () => const SplashPage(),
+      page: () => SplashPage(),
       binding: SplashBinding(),
     ),
     GetPage(
