@@ -3,8 +3,11 @@ import 'package:caffe_store_app/datas/models/base_models/base_result.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_change_quantity_model.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_create_model.dart';
 import 'package:caffe_store_app/datas/models/basket_models/basket_list_model.dart';
+import 'package:caffe_store_app/datas/models/order_models/order_create_model.dart';
+import 'package:caffe_store_app/datas/models/order_models/order_list_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_detail_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_model.dart';
+import 'package:caffe_store_app/datas/models/security_models/register_model.dart';
 import 'package:caffe_store_app/datas/services/base_service.dart';
 import 'package:dio/dio.dart';
 
@@ -83,7 +86,7 @@ class HomeRepository {
   Future<BaseResult> getPeriot(String token) async {
     try {
       return await BaseService.instance!.dioGet<SelectComponentModel>(
-        "Defination/GetProvince",
+        "Defination/GetPeriot",
         SelectComponentModel(),
         token: token,
       );
@@ -124,6 +127,59 @@ class HomeRepository {
         "Basket/ChangeBasketQuantity",
         BasketChangeQuantityModel(),
         formData,
+        token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> addOrder(OrderCreateModel model, String token) {
+    try {
+      var formData = FormData.fromMap(model.toMap());
+      return BaseService.instance!.dioPost<BasketChangeQuantityModel>(
+        "Order/AddOrder",
+        BasketChangeQuantityModel(),
+        formData,
+        token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getOrders(String token, int id) async {
+    try {
+      return await BaseService.instance!.dioGet<OrderListModel>(
+        "Order/GetOrders/${id}",
+        OrderListModel(),
+        token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getProfile(String token) async {
+    try {
+      return await BaseService.instance!.dioGet<RegisterModel>(
+        "Security/GetProfile",
+        RegisterModel(),
+        token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> updateProfile(RegisterModel model, String token) {
+    try {
+      var formData = FormData.fromMap(model.toMap());
+      return BaseService.instance!.dioPost<RegisterModel>(
+        "Security/UpdateProfile",
+        RegisterModel(),
+        formData,
+        token: token,
       );
     } catch (e) {
       throw e;

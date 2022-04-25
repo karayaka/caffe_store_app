@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:caffe_store_app/app_tools/tools.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_result.dart';
 import 'package:caffe_store_app/datas/models/base_models/base_service_model.dart';
@@ -19,7 +18,7 @@ class BaseService {
   BaseService._init() {
     final baseOptions = BaseOptions(
       baseUrl: Tools.baseUrl + "/service/api/",
-      //baseUrl: Tools.baseUrl + "/api/", //
+      //baseUrl: Tools.baseUrl + "/api/", //local service
     );
     _dio = Dio(baseOptions);
   }

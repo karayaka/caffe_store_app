@@ -1,5 +1,7 @@
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
 import 'package:caffe_store_app/datas/controllers/basket_controller.dart';
+import 'package:caffe_store_app/datas/controllers/order_controller.dart';
+import 'package:caffe_store_app/datas/controllers/profile_controller.dart';
 import 'package:caffe_store_app/datas/models/security_models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,10 @@ class MainController extends BaseController {
     currentIndex.value = index;
     if (index == 1) {
       Get.find<BasketController>().preparePage();
+    } else if (index == 2) {
+      Get.find<OrderController>().pagePrepage();
+    } else if (index == 3) {
+      Get.find<ProfileController>().pagePrepage();
     }
     pageController.animateToPage(index,
         duration: const Duration(microseconds: 300), curve: Curves.bounceIn);

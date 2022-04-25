@@ -176,7 +176,7 @@ class RegisterPage extends StatelessWidget {
                                 .copyWith(color: MyColors.grey_40)),
                       ),
                     ),
-                    loadingButon(context),
+                    _loadingButon(context),
                   ],
                 ),
               ),
@@ -205,7 +205,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget loadingButon(BuildContext context) => Obx(() {
+  Widget _loadingButon(BuildContext context) => Obx(() {
         if (ctrl.registerButtonLoading.value) {
           return const Padding(
             padding: EdgeInsets.all(8.0),

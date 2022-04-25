@@ -21,7 +21,6 @@ class BasketController extends BaseController {
   @override
   void onInit() async {
     preparePage();
-
     super.onInit();
   }
 
@@ -76,20 +75,21 @@ class BasketController extends BaseController {
     }
   }
 
-  Future changeBasketQuantity(int id, int quantity) async {
+  Future<void> changeBasketQuantity(int id, int quantity) async {
     try {
       var change = BasketChangeQuantityModel(
         id: id,
         quantity: quantity,
         basketTotal: 0.0,
       );
+      var basket = baskets.firstWhere((element) => element.id == id);
       pieceLodingID = id;
       update(["cardTota_$id"]);
       var token = await Get.find<MainController>().getToken();
       var total = prepareServiceModel<BasketChangeQuantityModel>(
-          await repo.changeBasketQuantity(change, token ?? ""));
+        await repo.changeBasketQuantity(change, token ?? ""),
+      );
       if (total != null) {
-        var basket = baskets.firstWhere((element) => element.id == id);
         basket.quantity = quantity;
         basket.totalPrice = total.basketTotal ?? 0;
         getBasketTotal();

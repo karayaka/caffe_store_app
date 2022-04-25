@@ -3,16 +3,37 @@ import 'package:caffe_store_app/datas/controllers/base_controller.dart';
 import 'package:caffe_store_app/datas/controllers/main_controller.dart';
 import 'package:caffe_store_app/datas/models/order_models/order_create_model.dart';
 import 'package:caffe_store_app/datas/repositorys/home_repository.dart';
+import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AddOrderController extends BaseController {
   var repo = Get.find<HomeRepository>();
+  //order create model
   var orderCreateModel = OrderCreateModel();
   var showAdressForm = false.obs;
   List<SelectComponentModel> provinces = [];
   List<SelectComponentModel> periots = [];
   var lodingFormAdress = false.obs;
+  var addOrdetLoding = false.obs;
+  //card hızlı göstrrim
+  var maskedCardNumber = "".obs;
+  var masketExpare = "".obs;
+  var cardcvv = "".obs;
+  var cardName = "".obs;
+
+  var cardNmbrFormatter = MaskTextInputFormatter(
+    mask: '#### #### #### ####',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+  var expareFormatter = MaskTextInputFormatter(
+    mask: '##/##',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -21,6 +42,7 @@ class AddOrderController extends BaseController {
   }
 
   var adressFormKey = GlobalKey<FormState>();
+  var paymentFormKey = GlobalKey<FormState>();
   var currentSteps = 0.obs;
 
   onStepContinue() {
@@ -103,6 +125,34 @@ class AddOrderController extends BaseController {
       return list;
     } catch (e) {
       return [];
+    }
+  }
+
+  bool validateAdressForm() {
+    if (orderCreateModel.orderTypeStatus == 1) {
+      if (orderCreateModel.neighborhoodID == 0 ||
+          orderCreateModel.adress == "") {
+        errorMessage("Lütfen Adres Bilgilerini Kotrol Edin");
+        return false;
+      }
+    }
+    if (orderCreateModel.deliveryPeriotID == null ||
+        orderCreateModel.deliveryPeriotID == 0) {
+      errorMessage("Lütfen Teslimat Periotunu Seçin");
+      return false;
+    }
+    return true;
+  }
+
+  addOrder() async {
+    try {
+      addOrdetLoding.value = true;
+      var token = await Get.find<MainController>().getToken();
+      prepareServiceModel(await repo.addOrder(orderCreateModel, token ?? ""));
+      addOrdetLoding.value = false;
+      Get.offAllNamed(RouteConst.home);
+    } catch (e) {
+      errorMessage("Bir Sorun Oluştu");
     }
   }
 }

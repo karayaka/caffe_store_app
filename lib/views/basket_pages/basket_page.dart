@@ -2,7 +2,6 @@ import 'package:caffe_store_app/core/components/cached_network_image_component.d
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/piece_select_component.dart';
 import 'package:caffe_store_app/datas/controllers/basket_controller.dart';
-import 'package:caffe_store_app/datas/models/basket_models/basket_list_model.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,8 +43,7 @@ class BasketPage extends StatelessWidget {
           child: ListView.builder(
             itemCount: ctrl.baskets.length,
             itemBuilder: ((context, index) {
-              var basket = ctrl.baskets[index];
-              return _buildBasketCard(basket, index);
+              return _buildBasketCard(index);
             }),
           ),
         ),
@@ -103,7 +101,8 @@ class BasketPage extends StatelessWidget {
         ));
   }
 
-  Widget _buildBasketCard(BasketListModel basket, int i) {
+  Widget _buildBasketCard(int i) {
+    var basket = ctrl.baskets[i];
     return Container(
       decoration: BoxDecoration(
         color: (i % 2 == 0) ? Colors.white : Colors.grey.shade100,
@@ -131,26 +130,29 @@ class BasketPage extends StatelessWidget {
                       PieceSelectComponent(
                         initCount: basket.quantity ?? 0,
                         onChange: (val) async {
-                          if (val != basket.quantity) {
-                            await ctrl.changeBasketQuantity(
-                                basket.id ?? 0, val);
-                          }
+                          await ctrl.changeBasketQuantity(basket.id ?? 0, val);
                         },
                       ),
-                      _buildCardTotal(basket),
+                      GetBuilder<BasketController>(
+                        id: "cardTota_${basket.id}",
+                        builder: (ctrl) {
+                          return _buildCardTotal(i);
+                        },
+                      ),
                     ],
                   )
                 ],
               ),
             ),
           ),
-          Expanded(flex: 1, child: _buildDeleteButton(basket)),
+          Expanded(flex: 1, child: _buildDeleteButton(i)),
         ],
       ),
     );
   }
 
-  Widget _buildDeleteButton(BasketListModel basket) {
+  Widget _buildDeleteButton(int i) {
+    var basket = ctrl.baskets[i];
     return GetBuilder<BasketController>(
       id: "delete_${basket.id}",
       builder: (contoller) {
@@ -171,21 +173,18 @@ class BasketPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCardTotal(BasketListModel basket) {
-    return GetBuilder<BasketController>(
-        id: "cardTota_${basket.id}",
-        builder: ((controller) {
-          if (ctrl.pieceLodingID == basket.id) {
-            return CustomCircularProgress();
-          } else {
-            return Text(
-              "${basket.totalPrice?.toStringAsFixed(2)} ₺",
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
-            );
-          }
-        }));
+  Widget _buildCardTotal(int i) {
+    var basket = ctrl.baskets[i];
+    if (ctrl.pieceLodingID == basket.id) {
+      return CustomCircularProgress();
+    } else {
+      return Text(
+        "${basket.totalPrice?.toStringAsFixed(2)} ₺",
+        style: const TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
   }
 }

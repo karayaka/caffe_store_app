@@ -45,8 +45,8 @@ class _PieceSelectComponentState extends State<PieceSelectComponent> {
                 if (widget.initCount > 1) {
                   setState(() {
                     widget.initCount--;
-                    widget.onChange(widget.initCount);
                   });
+                  widget.onChange(widget.initCount);
                 }
               },
               icon: const Icon(

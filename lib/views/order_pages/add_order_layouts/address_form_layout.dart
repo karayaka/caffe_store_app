@@ -1,4 +1,5 @@
 import 'package:caffe_store_app/app_tools/form_validations.dart';
+import 'package:caffe_store_app/core/component_models/address_select_result_model.dart';
 import 'package:caffe_store_app/core/components/adress_select_component.dart';
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/custom_radio_component.dart';
@@ -62,7 +63,7 @@ class AdressFormLayout extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              "Teslimat Zamanı",
+              "Teslimat Zamanları",
               style: TextStyle(fontSize: 15),
             ),
           ),
@@ -71,7 +72,9 @@ class AdressFormLayout extends StatelessWidget {
             child: CustomSelectComponent(
               items: ctrl.periots,
               dropdownLabel: "Teslimat Periyotu",
-              onChange: (val) {},
+              onChange: (val) {
+                ctrl.orderCreateModel.deliveryPeriotID = val.id;
+              },
               selectedId: 0,
             ),
           )
@@ -99,7 +102,11 @@ class AdressFormLayout extends StatelessWidget {
               province: ctrl.provinces,
               getDistrict: ctrl.getDistrict,
               getNeighborhood: ctrl.getNeighborhood,
-              onChange: (val) {},
+              onChange: (AddressSelectResultModel val) {
+                ctrl.orderCreateModel.provinceID = val.provinceID;
+                ctrl.orderCreateModel.districtID = val.districtID;
+                ctrl.orderCreateModel.neighborhoodID = val.neighborhoodID;
+              },
             ),
             Container(
               height: 50,
@@ -108,7 +115,9 @@ class AdressFormLayout extends StatelessWidget {
               child: TextFormField(
                 maxLines: 1,
                 validator: FormValidation.notEmty,
-                onChanged: (val) {},
+                onChanged: (val) {
+                  ctrl.orderCreateModel.adress = val;
+                },
                 decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(-12),
                     border: OutlineInputBorder(
@@ -116,7 +125,7 @@ class AdressFormLayout extends StatelessWidget {
                         color: Colors.grey,
                       ),
                     ),
-                    hintText: "AdresDetail",
+                    hintText: "No:2 Daire:3",
                     hintStyle: TextStyle()),
               ),
             )
