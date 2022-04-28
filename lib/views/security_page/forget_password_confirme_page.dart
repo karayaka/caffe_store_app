@@ -110,10 +110,10 @@ class ForgetrPasswordConfirmePage extends StatelessWidget {
           autoFocus: true,
           codeLength: 6,
           alignment: MainAxisAlignment.center,
-          defaultBoxSize: 36.0,
+          defaultBoxSize: 30.0,
           margin: 10,
-          selectedBoxSize: 36.0,
-          textStyle: const TextStyle(fontSize: 16),
+          selectedBoxSize: 30.0,
+          textStyle: const TextStyle(fontSize: 14),
           /*defaultDecoration: Get. _pinPutDecoration.copyWith(
               border: Border.all(
                   color: Theme.of(context).primaryColor.withOpacity(0.6))),

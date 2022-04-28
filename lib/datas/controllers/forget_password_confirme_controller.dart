@@ -12,6 +12,7 @@ class ForgetPasswordConfirmeController extends BaseController {
   void onInit() {
     confirmeTextController = TextEditingController();
     super.onInit();
+    _startListeningSms();
   }
 
   var repo = Get.find<SecurityRepository>();
@@ -37,6 +38,7 @@ class ForgetPasswordConfirmeController extends BaseController {
     SmsVerification.startListeningSms().then((message) {
       confirmedCode.value = SmsVerification.getCode(message, intRegex);
       confirmeTextController.text = confirmedCode.value;
+      print("forget Passwor token ${confirmedCode.value}");
     });
   }
 
@@ -46,6 +48,7 @@ class ForgetPasswordConfirmeController extends BaseController {
           await repo.reSendSMSCode(id));
       if (model != null) {
         code = model.confirmeCode;
+        _startListeningSms();
       }
     } catch (e) {
       errorMessage("Beklenmedik Bir Hata Oldu Data Sonra Tekrar Deneyin");

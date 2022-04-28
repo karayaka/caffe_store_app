@@ -2,7 +2,7 @@
     package="com.example.caffe_store_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="caffe_store_app"
+        android:label="Straborn Coffee"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -31,5 +31,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
+        <meta-data
+            android:name="io.flutter.embedding.android.SplashScreenDrawable"
+            android:resource="@drawable/launch_background" />
     </application>
 </manifest>

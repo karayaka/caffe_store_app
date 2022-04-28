@@ -108,16 +108,16 @@ class SecurityController extends BaseController {
         errorMessage("Telefon NUmarası Girin");
         return;
       }
+      var appsignuture = await getAppAppSignature();
+      print(appsignuture);
       forgetPasswordLoading.value = true;
       var model = prepareServiceModel<RegisterResultViewModel>(
-          await repo.resetPassword(phoneNumber));
+          await repo.resetPassword(phoneNumber, appsignuture ?? ""));
       forgetPasswordLoading.value = false;
       if (model != null) {
-        print(model.toJson());
         Get.toNamed(RouteConst.resetPasswordConfirmPhone,
             arguments: [model.id, model.confirmeCode]);
       }
-      print("route");
     } catch (e) {
       print(e.toString());
     }

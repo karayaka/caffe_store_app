@@ -55,11 +55,12 @@ class SecurityRepository {
     }
   }
 
-  Future<BaseResult> resetPassword(String phoneNumber) async {
+  Future<BaseResult> resetPassword(
+      String phoneNumber, String appsignuture) async {
     try {
       BaseResult model = await BaseService.instance!
           .dioGet<RegisterResultViewModel>(
-              "Security/ResetPassword/${phoneNumber}",
+              "Security/ResetPassword/${phoneNumber}/${appsignuture}",
               RegisterResultViewModel());
       return model;
     } catch (e) {

@@ -35,6 +35,7 @@ class RegisterPhoneConfirmController extends BaseController {
     SmsVerification.startListeningSms().then((message) {
       confirmedCode.value = SmsVerification.getCode(message, intRegex);
       confirmeTextController.text = confirmedCode.value;
+      print(confirmedCode.value);
     });
   }
 
@@ -44,6 +45,7 @@ class RegisterPhoneConfirmController extends BaseController {
           await repo.reSendSMSCode(id));
       if (model != null) {
         code = model.confirmeCode;
+        _startListeningSms();
       }
     } catch (e) {
       errorMessage("Beklenmedik Bir Hata Oldu Data Sonra Tekrar Deneyin");

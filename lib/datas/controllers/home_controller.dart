@@ -35,8 +35,8 @@ class HomeController extends BaseController {
   }
 
   routeCheck(int id, String name) async {
-    var token = await Get.find<MainController>().getToken();
-    if (token != null) {
+    var token = await Get.find<MainController>().getToken() ?? "";
+    if (token != "") {
       Get.toNamed(RouteConst.add_basket, arguments: {"ID": id, "title": name});
     } else {
       Get.toNamed(RouteConst.security);

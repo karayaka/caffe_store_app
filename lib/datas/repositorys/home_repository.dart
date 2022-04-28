@@ -14,8 +14,8 @@ import 'package:dio/dio.dart';
 class HomeRepository {
   Future<BaseResult> getProduct(int pageID) async {
     try {
-      BaseResult model = await BaseService.instance!.dioGet<ProductModel>(
-          "Product/GetProductList/${pageID}", ProductModel());
+      BaseResult model = await BaseService.instance!
+          .dioGet<ProductModel>("Product/GetProductList", ProductModel());
       return model;
     } catch (e) {
       throw e;
