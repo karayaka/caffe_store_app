@@ -3,6 +3,7 @@ import 'package:caffe_store_app/core/components/product_card_component.dart';
 import 'package:caffe_store_app/datas/controllers/home_controller.dart';
 import 'package:caffe_store_app/enums/screan_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -57,22 +58,34 @@ class HomeLayout extends StatelessWidget {
         onRefresh: () {
           return ctrl.getProduct();
         },
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.55,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8),
-            itemCount: ctrl.products.length,
-            itemBuilder: (context, i) {
-              var item = ctrl.products[i];
-              return ProductCardComponent(
-                item: item,
-                onClick: () {
-                  ctrl.routeCheck(item.id ?? 0, item.name ?? "");
-                },
-              );
-            }),
+        child: AnimationLimiter(
+          child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.55,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8),
+              itemCount: ctrl.products.length,
+              itemBuilder: (context, i) {
+                var item = ctrl.products[i];
+                return AnimationConfiguration.staggeredGrid(
+                  position: i,
+                  duration: const Duration(milliseconds: 395),
+                  columnCount: 2,
+                  child: SlideAnimation(
+                    horizontalOffset: 50.0,
+                    child: FadeInAnimation(
+                      child: ProductCardComponent(
+                        item: item,
+                        onClick: () {
+                          ctrl.routeCheck(item.id ?? 0, item.name ?? "");
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              }),
+        ),
       ),
     );
   }

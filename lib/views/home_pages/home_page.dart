@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/core/components/welcome_message_component.dart';
 import 'package:caffe_store_app/datas/controllers/main_controller.dart';
 import 'package:caffe_store_app/views/basket_pages/basket_page.dart';
 import 'package:caffe_store_app/views/home_pages/home_layout.dart';
@@ -16,13 +17,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Obx(() => _buildTitle()),
-        /*actions: [
-          IconButton(
-              onPressed: () {
-                Get.toNamed(RouteConst.security);
-              },
-              icon: Icon(Icons.local_activity)),
-        ],*/
       ),
       bottomNavigationBar: Obx(() {
         var color = Get.theme.primaryColor;
@@ -52,17 +46,28 @@ class HomePage extends StatelessWidget {
               )
             ]);
       }),
-      body: PageView(
-        onPageChanged: ctrl.onTapChange,
-        controller: ctrl.pageController,
-        children: [HomeLayout(), BasketPage(), OrderPage(), ProfilePage()],
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              onPageChanged: ctrl.onTapChange,
+              controller: ctrl.pageController,
+              children: [
+                HomeLayout(),
+                BasketPage(),
+                OrderPage(),
+                ProfilePage()
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildTitle() {
     return AnimatedSwitcher(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       switchInCurve: Curves.easeInBack,
       switchOutCurve: Curves.easeInBack,
       transitionBuilder: (child, animation) {
