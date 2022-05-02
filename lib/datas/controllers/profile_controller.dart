@@ -12,6 +12,7 @@ class ProfileController extends BaseController {
   var pageLoading = false.obs;
   var showLoginButton = true.obs;
   var saveLoading = false.obs;
+  var logOutLoding = false.obs;
   var profileFormKey = GlobalKey<FormState>();
   String token = "";
   @override
@@ -53,5 +54,12 @@ class ProfileController extends BaseController {
       print(e.toString());
       errorMessage("Bir Sorun Oluştu");
     }
+  }
+
+  logOut() async {
+    logOutLoding.value = true;
+    await Get.find<MainController>().logOut();
+    logOutLoding.value = false;
+    pagePrepage();
   }
 }

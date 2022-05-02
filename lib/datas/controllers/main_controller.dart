@@ -66,4 +66,9 @@ class MainController extends BaseController {
       return LoginModel().fromJson(str);
     }
   }
+
+  Future<bool> logOut() async {
+    var preferences = await SharedPreferences.getInstance();
+    return preferences.clear();
+  }
 }

@@ -209,6 +209,10 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     _loadingButon(context),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _logOutButton(context),
                   ],
                 ),
               ),
@@ -240,6 +244,34 @@ class ProfilePage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   child: Text("Güncelle",
+                      style:
+                          MyText.body2(context)!.copyWith(color: Colors.white)),
+                )),
+          );
+        }
+      });
+
+  Widget _logOutButton(BuildContext context) => Obx(() {
+        if (ctrl.logOutLoding.value) {
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: CustomCircularProgress(),
+          );
+        } else {
+          return Material(
+            color: Colors.red,
+            child: InkWell(
+                highlightColor: Colors.black.withOpacity(0.2),
+                splashColor: Colors.black.withOpacity(0.2),
+                onTap: () {
+                  ctrl.logOut();
+                },
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: Text("Çıkış Yap",
                       style:
                           MyText.body2(context)!.copyWith(color: Colors.white)),
                 )),
