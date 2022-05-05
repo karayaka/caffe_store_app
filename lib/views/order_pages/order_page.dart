@@ -3,7 +3,6 @@ import 'package:caffe_store_app/core/components/cached_network_image_component.d
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/horizontal_select_component.dart';
 import 'package:caffe_store_app/core/components/order_progress_component.dart';
-import 'package:caffe_store_app/core/components/order_status_select_component.dart';
 import 'package:caffe_store_app/datas/controllers/order_controller.dart';
 import 'package:caffe_store_app/datas/models/order_models/order_list_model.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
