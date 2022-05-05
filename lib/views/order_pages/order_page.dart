@@ -1,5 +1,7 @@
+import 'package:caffe_store_app/app_tools/tools.dart';
 import 'package:caffe_store_app/core/components/cached_network_image_component.dart';
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
+import 'package:caffe_store_app/core/components/horizontal_select_component.dart';
 import 'package:caffe_store_app/core/components/order_progress_component.dart';
 import 'package:caffe_store_app/core/components/order_status_select_component.dart';
 import 'package:caffe_store_app/datas/controllers/order_controller.dart';
@@ -37,8 +39,10 @@ class OrderPage extends StatelessWidget {
         children: [
           SizedBox(
             width: double.infinity,
-            height: 60,
-            child: OrderStatusSelectComponent(
+            height: 55,
+            child: HorizontalSelectComponent(
+              initVal: -1,
+              items: Tools.orderStatuses,
               onChange: (int val) {
                 ctrl.getPage(id: val);
               },

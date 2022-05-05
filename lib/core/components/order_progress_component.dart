@@ -36,11 +36,25 @@ class OrderProgressComponent extends StatelessWidget {
           ),
         ),
       );
-    } else {
+    } else if (orderStatus == 2) {
       return Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(50)),
             color: Colors.green),
+        child: const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: Text(
+            "Hazır",
+            style: TextStyle(color: Colors.white, fontSize: 10),
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+          color: Colors.blueGrey,
+        ),
         child: const Padding(
           padding: EdgeInsets.all(4.0),
           child: Text(
