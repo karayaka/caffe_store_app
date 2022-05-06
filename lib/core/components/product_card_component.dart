@@ -19,7 +19,7 @@ class ProductCardComponent extends StatelessWidget {
       children: [
         SizedBox(
             width: (size.width - 24),
-            height: 170,
+            height: 120,
             child: CachedNetworkImageComponent(url: item.image ?? "")),
         Text(
           item.name ?? "",
@@ -28,7 +28,7 @@ class ProductCardComponent extends StatelessWidget {
         const SizedBox(height: 3),
         Expanded(
           child: Text(
-            item.desc ?? "",
+            _buildText(item.desc),
             style: const TextStyle(
               fontSize: 13,
             ),
@@ -55,5 +55,15 @@ class ProductCardComponent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _buildText(String? text) {
+    if (text == null)
+      return "";
+    else if (text.length > 80) {
+      var txt = text.substring(0, 80);
+      return "$txt...";
+    } else
+      return text;
   }
 }

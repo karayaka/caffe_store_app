@@ -12,10 +12,12 @@ import 'package:caffe_store_app/datas/services/base_service.dart';
 import 'package:dio/dio.dart';
 
 class HomeRepository {
-  Future<BaseResult> getProduct(int pageID) async {
+  Future<BaseResult> getProduct(
+    int categoryID,
+  ) async {
     try {
-      BaseResult model = await BaseService.instance!
-          .dioGet<ProductModel>("Product/GetProductList", ProductModel());
+      BaseResult model = await BaseService.instance!.dioGet<ProductModel>(
+          "Product/GetProductList/$categoryID", ProductModel());
       return model;
     } catch (e) {
       throw e;
@@ -113,6 +115,17 @@ class HomeRepository {
         "Defination/GetNeighborhood/${id}",
         SelectComponentModel(),
         token: token,
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<BaseResult> getCategory() async {
+    try {
+      return await BaseService.instance!.dioGet<SelectComponentModel>(
+        "Defination/GetCategorys",
+        SelectComponentModel(),
       );
     } catch (e) {
       throw e;

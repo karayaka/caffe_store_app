@@ -1,3 +1,4 @@
+import 'package:caffe_store_app/core/component_models/select_component_model.dart';
 import 'package:caffe_store_app/datas/controllers/base_controller.dart';
 import 'package:caffe_store_app/datas/controllers/main_controller.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_model.dart';
@@ -9,29 +10,33 @@ import 'package:get/get.dart';
 class HomeController extends BaseController {
   var repo = Get.find<HomeRepository>();
 
-  bool nextPageLoding = false;
+  var categoryLoading = false.obs;
+  var listLoading = false.obs;
 
   List<ProductModel> products = [];
+
+  List<SelectComponentModel> categorys = [
+    SelectComponentModel(id: 0, text: "Tümü", value: "0")
+  ];
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProduct();
+    getProduct(0);
+    getCategorys();
   }
 
-  int pageID = 1;
-
-  getProduct() async {
-    state.value = ScreanState.loading;
+  getProduct(int categoryID) async {
+    listLoading.value = true;
     try {
       var model = prepareServiceModel<List<ProductModel>>(
-          await repo.getProduct(pageID));
+          await repo.getProduct(categoryID));
       if (model != null) products = model;
     } catch (e) {
       errorMessage(e.toString());
     }
-    state.value = ScreanState.loaded;
+    listLoading.value = false;
   }
 
   routeCheck(int id, String name) async {
@@ -41,5 +46,17 @@ class HomeController extends BaseController {
     } else {
       Get.toNamed(RouteConst.security);
     }
+  }
+
+  getCategorys() async {
+    try {
+      categoryLoading.value = true;
+      var models = prepareServiceModel<List<SelectComponentModel>>(
+          await repo.getCategory());
+      if (models != null) categorys.addAll(models);
+    } catch (e) {
+      errorMessage("Bir Sorun Oluştu");
+    }
+    categoryLoading.value = false;
   }
 }

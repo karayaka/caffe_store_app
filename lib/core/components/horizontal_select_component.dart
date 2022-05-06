@@ -24,7 +24,7 @@ class _HorizontalSelectComponentState extends State<HorizontalSelectComponent> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.onChange(widget.initVal);
+    //widget.onChange(widget.initVal);
   }
 
   @override
@@ -60,9 +60,9 @@ class _HorizontalSelectComponentState extends State<HorizontalSelectComponent> {
 
   TextStyle _getTextStayle(int id) {
     if (widget.initVal == id) {
-      return TextStyle(fontSize: 16, color: Colors.white);
+      return TextStyle(fontSize: 15, color: Colors.white);
     } else {
-      return TextStyle(fontSize: 16, color: Get.theme.primaryColor);
+      return TextStyle(fontSize: 15, color: Get.theme.primaryColor);
     }
   }
 

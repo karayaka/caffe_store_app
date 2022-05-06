@@ -1,4 +1,5 @@
 import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
+import 'package:caffe_store_app/core/components/horizontal_select_component.dart';
 import 'package:caffe_store_app/core/components/product_card_component.dart';
 import 'package:caffe_store_app/datas/controllers/home_controller.dart';
 import 'package:caffe_store_app/enums/screan_state.dart';
@@ -12,57 +13,55 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(children: [
+      SizedBox(
+        height: 55,
+        child: _buildCategorySelector(),
+      ),
+      Expanded(
+        child: _buildPage(),
+      ),
+    ]);
+  }
+
+  _buildCategorySelector() => Obx(() {
+        if (ctrl.categoryLoading.value) {
+          return const Center(
+            child: LinearProgressIndicator(),
+          );
+        } else {
+          return HorizontalSelectComponent(
+            initVal: 0,
+            items: ctrl.categorys,
+            onChange: (val) {
+              ctrl.getProduct(val);
+            },
+          );
+        }
+      });
+
+  _buildPage() {
     return Obx(() {
-      if (ctrl.state.value == ScreanState.loading) {
+      if (ctrl.listLoading.value) {
         return const CustomCircularProgress();
       } else {
-        return _buildList();
+        return _buildListview();
       }
     });
   }
 
-  Widget _buildList() {
-    return NotificationListener<ScrollEndNotification>(
-      onNotification: (t) {
-        if (t.metrics.pixels > 0 && t.metrics.atEdge) {
-          if (!ctrl.nextPageLoding) {
-            //ctrl.getTestNextPage(); nextpage
-          }
-        }
-        return false;
-      },
-      child: Column(
-        children: [
-          Expanded(child: _buildListview()),
-          GetBuilder<HomeController>(
-              id: "loding",
-              builder: (contro) {
-                if (ctrl.nextPageLoding) {
-                  return const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: CustomCircularProgress(),
-                  );
-                } else {
-                  return Container();
-                }
-              }),
-        ],
-      ),
-    );
-  }
-
-  Padding _buildListview() {
+  Widget _buildListview() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RefreshIndicator(
         onRefresh: () {
-          return ctrl.getProduct();
+          return ctrl.getProduct(0);
         },
         child: AnimationLimiter(
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.55,
+                  childAspectRatio: 0.77,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemCount: ctrl.products.length,
