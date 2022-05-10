@@ -87,6 +87,7 @@ class SecurityController extends BaseController {
       }
     } catch (e) {
       loginLoading.value = false;
+      main.logOut();
     }
   }
 

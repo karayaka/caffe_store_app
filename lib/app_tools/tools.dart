@@ -1,9 +1,9 @@
 import 'package:caffe_store_app/core/component_models/select_component_model.dart';
 
 class Tools {
-  static const String baseUrl = "https://apptest.cagnaz.com";
+  //static const String baseUrl = "https://apptest.cagnaz.com";
   //static const String baseUrl = "https://192.168.1.10:45457";
-  //static const String baseUrl = "http://panel.straborn.com";
+  static const String baseUrl = "http://panel.straborn.com";
 
   static List<SelectComponentModel> orderStatuses = [
     SelectComponentModel(id: -1, value: "-1", text: "Tümü"),

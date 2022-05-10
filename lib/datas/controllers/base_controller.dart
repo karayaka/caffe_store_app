@@ -29,6 +29,7 @@ class BaseController extends GetxController {
         break;
       case ResultStatus.unauthorized: //buraya login route yapılabilir
         errorMessage("Servis Bağlatısı Yapılamadı");
+
         break;
     }
   }

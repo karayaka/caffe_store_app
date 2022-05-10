@@ -15,23 +15,26 @@ class SplashController extends BaseController {
 
   var repo = Get.find<SecurityRepository>();
   var showLoading = true.obs;
-
+//unoutorize yapısı yeniden kurgulanacak ve düzeltilecek apiden un outorize dönme ihtimali kotrol edilecek
+//connectivity yazılıp interbnet bağlantısı kotrol edilecek
   autoLogin() async {
+    var mainController = Get.find<MainController>();
     try {
-      var mainController = Get.find<MainController>();
       var userModel = await mainController.getLoginModel();
       if (userModel != null) {
         var model =
             prepareServiceModel<LoginResultModel>(await repo.login(userModel));
         if (model != null) {
           mainController.setToken(model.token ?? "");
+        } else {
+          userModel = null;
+          mainController.logOut();
         }
-      } else {
-        mainController.setToken("");
       }
       Get.offAndToNamed(RouteConst.home);
     } catch (e) {
-      throw e;
+      mainController.logOut();
+      Get.offAndToNamed(RouteConst.home);
     }
   }
 }

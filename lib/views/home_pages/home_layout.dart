@@ -2,7 +2,6 @@ import 'package:caffe_store_app/core/components/custom_circular_progress.dart';
 import 'package:caffe_store_app/core/components/horizontal_select_component.dart';
 import 'package:caffe_store_app/core/components/product_card_component.dart';
 import 'package:caffe_store_app/datas/controllers/home_controller.dart';
-import 'package:caffe_store_app/enums/screan_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -61,7 +60,7 @@ class HomeLayout extends StatelessWidget {
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.77,
+                  childAspectRatio: 0.70,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemCount: ctrl.products.length,

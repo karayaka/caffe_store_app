@@ -76,8 +76,8 @@ class BaseService {
   ///bağlantı sırasında oluşabilcek hatalar için resultlar
   BaseResult _prePareResult<T extends BaseServiceModel>(
       Response? response, T model) {
+    var result = BaseResult();
     try {
-      var result = BaseResult();
       if (response == null) {
         result.message = "Bağlantı Hatası";
         result.type = ResultStatus.danger;
@@ -101,6 +101,16 @@ class BaseService {
               return result;
             }
         }
+      }
+    } on DioError catch (ex) {
+      if (ex.response?.statusCode == 401) {
+        result.message = "Oturumunuzun Süresi Dolmuştur";
+        result.type = ResultStatus.unauthorized;
+        return result;
+      } else {
+        result.message = "Hata Oluştu";
+        result.type = ResultStatus.danger;
+        return result;
       }
     } catch (e) {
       throw e;
@@ -146,6 +156,4 @@ class BaseService {
       return fechData;
     }
   }
-
-  ///updata ve delete yazılabilir aynı yöntemle
 }

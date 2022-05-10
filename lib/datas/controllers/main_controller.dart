@@ -11,7 +11,7 @@ class MainController extends BaseController {
   late PageController pageController;
   var titles = ["Ürünler", "Sepetim", "Siparişlerim", "Profilim"];
   var _token = "";
-  var _loginModel = LoginModel();
+  LoginModel? _loginModel = LoginModel();
   @override
   void onInit() {
     pageController = PageController(initialPage: currentIndex.value);
@@ -57,7 +57,7 @@ class MainController extends BaseController {
   }
 
   Future<LoginModel?> getLoginModel() async {
-    if (_loginModel.password != null) {
+    if (_loginModel != null) {
       return _loginModel;
     } else {
       var preferences = await SharedPreferences.getInstance();
@@ -69,6 +69,8 @@ class MainController extends BaseController {
 
   Future<bool> logOut() async {
     var preferences = await SharedPreferences.getInstance();
+    _token = "";
+    _loginModel = null;
     return preferences.clear();
   }
 }
