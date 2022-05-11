@@ -26,9 +26,6 @@ class SplashController extends BaseController {
             prepareServiceModel<LoginResultModel>(await repo.login(userModel));
         if (model != null) {
           mainController.setToken(model.token ?? "");
-        } else {
-          userModel = null;
-          mainController.logOut();
         }
       }
       Get.offAndToNamed(RouteConst.home);

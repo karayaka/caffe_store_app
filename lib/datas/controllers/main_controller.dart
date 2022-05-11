@@ -11,7 +11,7 @@ class MainController extends BaseController {
   late PageController pageController;
   var titles = ["Ürünler", "Sepetim", "Siparişlerim", "Profilim"];
   var _token = "";
-  LoginModel? _loginModel = LoginModel();
+  LoginModel? _loginModel;
   @override
   void onInit() {
     pageController = PageController(initialPage: currentIndex.value);
