@@ -28,6 +28,7 @@ class BasketController extends BaseController {
     var token = await Get.find<MainController>().getToken() ?? "";
     if (token != "") {
       isLogined.value = true;
+
       getPage(token);
     } else {
       isLogined.value = false;
