@@ -3,7 +3,6 @@ import 'package:caffe_store_app/datas/controllers/base_controller.dart';
 import 'package:caffe_store_app/datas/controllers/main_controller.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_model.dart';
 import 'package:caffe_store_app/datas/repositorys/home_repository.dart';
-import 'package:caffe_store_app/enums/screan_state.dart';
 import 'package:caffe_store_app/routings/route_couns.dart';
 import 'package:get/get.dart';
 

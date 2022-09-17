@@ -35,8 +35,9 @@ class AddBasketPage extends StatelessWidget {
           Expanded(
             flex: 8,
             child: SingleChildScrollView(
-              child:
-                  Column(children: [_buildTitleCard(), ..._buildQuestions()]),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [_buildTitleCard(), ..._buildQuestions()]),
             ),
           ),
           Container(
@@ -98,19 +99,28 @@ class AddBasketPage extends StatelessWidget {
 
   List<Widget> _buildQuestions() {
     var questions = ctrl.product.questions;
-    return questions!.map((e) {
-      return GetBuilder<AddBasketController>(
-        id: "select_${e.id}",
-        builder: (ct) {
-          return Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom:
-                          BorderSide(color: Get.theme.colorScheme.secondary))),
-              child: _buildSelection(e));
-        },
-      );
-    }).toList();
+    if (ctrl.product.hasNotSpesification ?? true) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(ctrl.product.desc ?? ""),
+        ),
+      ];
+    } else {
+      return questions!.map((e) {
+        return GetBuilder<AddBasketController>(
+          id: "select_${e.id}",
+          builder: (ct) {
+            return Container(
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: Get.theme.colorScheme.secondary))),
+                child: _buildSelection(e));
+          },
+        );
+      }).toList();
+    }
   }
 
   Widget _buildSelection(ProductQuestionModel? question) {

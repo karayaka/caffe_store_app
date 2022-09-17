@@ -42,9 +42,9 @@ class BasketPage extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             itemCount: ctrl.baskets.length,
-            itemBuilder: ((context, index) {
+            itemBuilder: (context, index) {
               return _buildBasketCard(index);
-            }),
+            },
           ),
         ),
         Container(

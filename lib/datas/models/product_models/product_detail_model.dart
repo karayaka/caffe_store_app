@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:caffe_store_app/datas/models/base_models/base_service_model.dart';
 import 'package:caffe_store_app/datas/models/product_models/product_question_model.dart';
 
@@ -9,10 +7,17 @@ class ProductDetailModel extends BaseServiceModel {
   String? name;
   String? desc;
   double? price;
+  bool? hasNotSpesification;
   List<ProductQuestionModel>? questions;
 
   ProductDetailModel(
-      {this.id, this.desc, this.image, this.name, this.price, this.questions});
+      {this.id,
+      this.desc,
+      this.image,
+      this.name,
+      this.price,
+      this.questions,
+      this.hasNotSpesification});
 
   @override
   fromMap(Map<String, dynamic> map) {
@@ -23,6 +28,7 @@ class ProductDetailModel extends BaseServiceModel {
       image: map["image"],
       name: map["name"],
       price: map["price"],
+      hasNotSpesification: map["hasNotSpesification"],
     );
     if (map["questions"] != null) {
       for (var item in map["questions"]) {
@@ -39,6 +45,7 @@ class ProductDetailModel extends BaseServiceModel {
         "desc": desc,
         "image": image,
         "price": price,
+        "hasNotSpesification": hasNotSpesification
         //"questions": questions?.map((e) => e.toMap()),
       };
 }

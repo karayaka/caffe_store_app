@@ -21,16 +21,22 @@ class ProductCardComponent extends StatelessWidget {
             width: (size.width - 24),
             height: 120,
             child: CachedNetworkImageComponent(url: item.image ?? "")),
-        Text(
-          item.name ?? "",
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 3),
         Expanded(
+          flex: 1,
+          child: FittedBox(
+            child: Text(
+              item.name ?? "",
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        const SizedBox(height: 1),
+        Expanded(
+          flex: 3,
           child: Text(
             _buildText(item.desc),
             style: const TextStyle(
-              fontSize: 13,
+              fontSize: 12,
             ),
           ),
         ),

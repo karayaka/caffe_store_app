@@ -32,8 +32,9 @@ class AddBasketController extends BaseController {
     try {
       state.value = ScreanState.loading;
       try {
+        var token = await Get.find<MainController>().getToken();
         var model = prepareServiceModel<ProductDetailModel>(
-            await repo.getProductDetail(id));
+            await repo.getProductDetail(id, token ?? ""));
         if (model != null) {
           product = model;
           totalCoust.value = model.price ?? 0;

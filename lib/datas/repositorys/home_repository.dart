@@ -24,10 +24,11 @@ class HomeRepository {
     }
   }
 
-  Future<BaseResult> getProductDetail(int ID) async {
+  Future<BaseResult> getProductDetail(int ID, String token) async {
     try {
       BaseResult model = await BaseService.instance!.dioGet<ProductDetailModel>(
-          "Product/GetProductDetail/${ID}", ProductDetailModel());
+          "Product/GetProductDetail/${ID}", ProductDetailModel(),
+          token: token);
       return model;
     } catch (e) {
       throw e;
