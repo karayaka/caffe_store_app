@@ -161,6 +161,28 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
                         onChanged: (val) {
+                          ctrl.registerModel.identityNumber = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "TC Kimlik No",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
+                        onChanged: (val) {
                           ctrl.registerModel.email = val;
                         },
                         validator: (val) {
@@ -172,6 +194,48 @@ class RegisterPage extends StatelessWidget {
                             contentPadding: const EdgeInsets.all(-12),
                             border: InputBorder.none,
                             hintText: "Email",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
+                        onChanged: (val) {
+                          ctrl.registerModel.city = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "Şehir",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
+                        onChanged: (val) {
+                          ctrl.registerModel.adressDetail = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "Adres Detay",
                             hintStyle: MyText.body1(context)!
                                 .copyWith(color: MyColors.grey_40)),
                       ),

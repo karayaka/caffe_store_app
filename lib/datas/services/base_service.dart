@@ -10,6 +10,7 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 class BaseService {
   static BaseService? _instance;
   static BaseService? get instance {
+
     _instance ??= BaseService._init();
     return _instance;
   }

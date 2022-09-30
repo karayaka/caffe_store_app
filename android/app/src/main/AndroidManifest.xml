@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.caffe_store_app">
+    package="com.straborn.straborn">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="Straborn Coffee"
+        android:label="Straborn"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

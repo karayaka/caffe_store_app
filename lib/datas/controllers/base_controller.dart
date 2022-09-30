@@ -15,6 +15,7 @@ class BaseController extends GetxController {
   }
 
   showSeviceAlert(ResultStatus type, String message) {
+    print(message);
     switch (type) {
       case ResultStatus.succes:
         if (message.isNotEmpty) {

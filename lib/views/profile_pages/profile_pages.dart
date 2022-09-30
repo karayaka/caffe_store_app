@@ -191,6 +191,28 @@ class ProfilePage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
+                        initialValue: ctrl.profile.identityNumber,
+                        onChanged: (val) {
+                          ctrl.profile.identityNumber = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "TC Kimlik No",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
                         initialValue: ctrl.profile.email,
                         onChanged: (val) {
                           ctrl.profile.email = val;
@@ -204,6 +226,51 @@ class ProfilePage extends StatelessWidget {
                             contentPadding: const EdgeInsets.all(-12),
                             border: InputBorder.none,
                             hintText: "Email",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
+                        initialValue: ctrl.profile.city,
+                        onChanged: (val) {
+                          ctrl.profile.city = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "Şehir",
+                            hintStyle: MyText.body1(context)!
+                                .copyWith(color: MyColors.grey_40)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextFormField(
+                        initialValue: ctrl.profile.adressDetail,
+                        onChanged: (val) {
+                          ctrl.profile.adressDetail = val;
+                        },
+                        validator: (val) {
+                          return FormValidation.notEmty(val);
+                        },
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(-12),
+                            border: InputBorder.none,
+                            hintText: "Adres Detay",
                             hintStyle: MyText.body1(context)!
                                 .copyWith(color: MyColors.grey_40)),
                       ),

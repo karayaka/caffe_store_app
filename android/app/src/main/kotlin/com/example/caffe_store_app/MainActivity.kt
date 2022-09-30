@@ -1,4 +1,4 @@
-package com.example.caffe_store_app
+package com.straborn.straborn
 
 import io.flutter.embedding.android.FlutterActivity
 

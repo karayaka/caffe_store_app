@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'STRABORN',
       theme: coffeStoreTheme,
+      debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
       getPages: RoutePages.pages,
       initialRoute: RouteConst.splash,

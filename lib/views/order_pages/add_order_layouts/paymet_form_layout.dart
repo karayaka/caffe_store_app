@@ -164,8 +164,7 @@ class PaymetFormLayout extends StatelessWidget {
                             onChanged: (val) {
                               ctrl.masketExpare.value =
                                   ctrl.expareFormatter.getMaskedText();
-                              ctrl.orderCreateModel.cardDate =
-                                  ctrl.expareFormatter.getUnmaskedText();
+                              ctrl.orderCreateModel.cardDate =val;
                             },
                           ),
                           flex: 1,
